@@ -73,11 +73,51 @@ code .
 3. **Press Enter** and see if Copilot suggests Flask code
 4. **Ask Copilot**: "Show me the project structure and explain the safety features"
 
+#### Set Up Development Environment with Copilot
+Once Copilot is working, ask it to help set up your development environment:
+
+**Prompt to use with Copilot:**
+```
+I need to set up the development environment for this Flask project using Pipenv. 
+
+Please help me:
+1. Create a Pipfile with the core Flask dependencies listed in the project documentation
+2. Set up the virtual environment using Pipenv
+3. Install development dependencies for testing and code quality
+4. Create a basic .env template file
+5. Verify the setup is working correctly
+
+Follow the project's 7-step workflow and ask for permission before creating any files.
+```
+
+**Expected Copilot Response:**
+Copilot will analyze the project structure, review the dependency requirements from the documentation, and guide you through creating:
+- `Pipfile` with production dependencies (Flask, Flask-WTF, Flask-SQLAlchemy, etc.)
+- Development dependencies (pytest, black, flake8, coverage)
+- `.env` template with required environment variables
+- Instructions for activating the virtual environment
+
 #### Start Development
 1. **Read the safety protocols**: Check `.vscode/copilot-instructions.md`
 2. **Review examples**: Browse `docs/copilot/INTERACTIONS.md`
 3. **Use templates**: Reference `docs/copilot/PROMPTS.md` for effective prompts
 4. **Follow workflow**: Always use the 7-step development process
+
+#### First Development Task Example
+Try this prompt with Copilot to test the full workflow:
+```
+I want to create a basic Flask application structure following this project's patterns.
+
+Please:
+1. Analyze the project requirements from the documentation
+2. Suggest the implementation approach
+3. Create the basic app structure with Application Factory pattern
+4. Include proper error handling and logging
+5. Add comprehensive tests
+6. Update documentation
+
+Remember to follow the 7-step workflow and ask for permission before making changes.
+```
 
 ## Quick Start
 See [DEVELOPMENT.md](./DEVELOPMENT.md) for detailed setup instructions.
@@ -158,3 +198,5 @@ flask-copilot-starter/
 - **No custom instructions?** Ensure `.vscode/copilot-instructions.md` exists in your workspace
 - **Safety features unclear?** Review the AI safety system in the instructions file
 - **Need examples?** Check the interaction patterns in `docs/copilot/INTERACTIONS.md`
+- **Environment setup issues?** Use the Pipenv setup prompt in the [First Steps section](#set-up-development-environment-with-copilot)
+- **Pipenv not working?** Ensure Python 3.8+ is installed and Pipenv is available (`pip install pipenv`)

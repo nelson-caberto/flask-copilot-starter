@@ -75,6 +75,38 @@ Simplification options:
 Which simplification approach would you prefer?
 ```
 
+### Environment Setup
+```
+# Pipenv Environment Setup
+I need to set up the development environment for this Flask project using Pipenv.
+
+Please help me:
+1. Create a Pipfile with the core Flask dependencies listed in the project documentation
+2. Set up the virtual environment using Pipenv
+3. Install development dependencies for testing and code quality
+4. Create a basic .env template file
+5. Verify the setup is working correctly
+
+Follow the project's 7-step workflow and ask for permission before creating any files.
+
+# Development Environment Verification
+Please verify my development environment is set up correctly:
+- Check that Pipenv is working and virtual environment is active
+- Verify all required dependencies are installed
+- Test that Flask can import successfully
+- Confirm testing framework is available
+- Validate code quality tools are working
+
+# Environment Troubleshooting
+I'm having issues with my development environment setup:
+- Python version: [your version]
+- Pipenv version: [your version]
+- Error messages: [paste any errors]
+- Operating system: [your OS]
+
+Please help me diagnose and fix the environment setup issues.
+```
+
 ## Core Development Prompts
 
 ### Feature Development
