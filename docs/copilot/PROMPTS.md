@@ -87,7 +87,7 @@ Please help me:
 4. Create a basic .env template file
 5. Verify the setup is working correctly
 
-Follow the project's 7-step workflow and ask for permission before creating any files.
+Follow the project's 8-step workflow and ask for permission before creating any files.
 
 # Development Environment Verification
 Please verify my development environment is set up correctly:

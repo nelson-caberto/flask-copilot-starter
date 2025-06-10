@@ -87,7 +87,7 @@ Please help me:
 4. Create a basic .env template file
 5. Verify the setup is working correctly
 
-Follow the project's 7-step workflow and ask for permission before creating any files.
+Follow the project's 8-step workflow and ask for permission before creating any files.
 ```
 
 **Expected Copilot Response:**
@@ -101,7 +101,7 @@ Copilot will analyze the project structure, review the dependency requirements f
 1. **Read the safety protocols**: Check `.vscode/copilot-instructions.md`
 2. **Review examples**: Browse `docs/copilot/INTERACTIONS.md`
 3. **Use templates**: Reference `docs/copilot/PROMPTS.md` for effective prompts
-4. **Follow workflow**: Always use the 7-step development process
+4. **Follow workflow**: Always use the 8-step development process
 
 #### First Development Task Example
 Try this prompt with Copilot to test the full workflow:
@@ -116,7 +116,7 @@ Please:
 5. Add comprehensive tests
 6. Update documentation
 
-Remember to follow the 7-step workflow and ask for permission before making changes.
+Remember to follow the 8-step workflow and ask for permission before making changes.
 ```
 
 ## Quick Start
@@ -143,7 +143,7 @@ See [DEVELOPMENT.md](./DEVELOPMENT.md) for detailed setup instructions.
 - **Interaction Examples**: Real collaboration patterns with success metrics
 
 ### 🛡️ **Built-in Safety & Quality**
-- **7-Step Workflow**: Mandatory process ensuring code quality and documentation
+- **8-Step Workflow**: Mandatory process ensuring code quality and documentation
 - **Automatic Testing**: Comprehensive test structure with 90%+ coverage requirements
 - **Security Focus**: CSRF protection, input validation, and secure session handling
 - **Database Safety**: Production database protection and test isolation
@@ -200,3 +200,6 @@ flask-copilot-starter/
 - **Need examples?** Check the interaction patterns in `docs/copilot/INTERACTIONS.md`
 - **Environment setup issues?** Use the Pipenv setup prompt in the [First Steps section](#set-up-development-environment-with-copilot)
 - **Pipenv not working?** Ensure Python 3.8+ is installed and Pipenv is available (`pip install pipenv`)
+
+---
+*Last updated: June 10, 2025*

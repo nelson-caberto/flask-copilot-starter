@@ -292,7 +292,7 @@ particularly focusing on [OWASP Top 10/specific threats]."
 
 #### Time Savers:
 - Using established prompt templates: 30% faster
-- Following 7-step workflow: 25% fewer revisions
+- Following 8-step workflow: 25% fewer revisions
 - Maintaining context throughout session: 40% better results
 
 ## Best Practices Evolved

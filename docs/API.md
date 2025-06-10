@@ -60,5 +60,5 @@ print(response.json())
 ```
 
 ---
-*Last updated: [Current Date]*
-*Version: [Current Version]*
+*Last updated: June 10, 2025*
+*Version: 0.1.0*

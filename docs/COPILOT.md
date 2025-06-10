@@ -8,7 +8,7 @@ This guide documents best practices for collaborating with GitHub Copilot on Fla
 ### Essential Copilot Commands
 - **Request permission**: "Can I create/modify [filename]?"
 - **Analyze before action**: "What would be the best approach for [task]?"
-- **Follow workflow**: Always follow the 7-step development workflow
+- **Follow workflow**: Always follow the 8-step development workflow
 - **Update docs**: "Please update documentation for this change"
 
 ### Effective Collaboration Patterns
@@ -73,7 +73,7 @@ This guide documents best practices for collaborating with GitHub Copilot on Fla
 - **Provide context**: Reference existing code and patterns
 
 ### Code Quality
-- **Follow workflow**: Always use the 7-step development process
+- **Follow workflow**: Always use the 8-step development process
 - **Test thoroughly**: Include edge cases and comprehensive coverage
 - **Document everything**: Keep all documentation current
 - **Review suggestions**: Critically evaluate Copilot's proposals
@@ -107,4 +107,5 @@ This guide documents best practices for collaborating with GitHub Copilot on Fla
 
 ---
 
+*Last updated: June 10, 2025*
 *This guide evolves with your project. Update it regularly to capture new insights and improve collaboration effectiveness.*
