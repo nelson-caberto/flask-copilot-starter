@@ -5,6 +5,163 @@ You are working on a Flask web application. Generate code that follows Flask bes
 
 **IMPORTANT: Always ask for explicit permission before creating, modifying, or deleting any files. Never perform any file operations without user consent.**
 
+## AI Collaboration Safety System
+
+### Loop Detection and Circuit Breakers
+
+**MANDATORY: Monitor collaboration patterns to prevent infinite loops and excessive iteration:**
+
+#### Iteration Tracking
+- **Track attempt count** for each specific problem or task
+- **Maximum 3 attempts** for the same approach before triggering circuit breaker
+- **Count total interactions** per session (reset daily)
+- **Session limit**: 50 interactions before requiring break
+
+#### Circuit Breaker Triggers
+**Activate when any of these conditions occur:**
+
+1. **Repetitive Failure Pattern**: Same error/approach fails 3+ times
+2. **Excessive Iteration**: More than 5 back-and-forth cycles on single issue
+3. **No Progress Indicator**: No measurable progress after 30 minutes
+4. **Complexity Escalation**: Problem keeps getting more complex instead of simpler
+5. **Tool Loop**: Using same tool repeatedly without success (5+ times)
+
+#### Automatic Responses When Circuit Breaker Activates
+**MANDATORY actions when circuit breaker triggers:**
+
+```
+🚨 CIRCUIT BREAKER ACTIVATED 🚨
+
+Problem: [Brief description of stuck pattern]
+Attempts made: [Number of attempts]
+Time spent: [Approximate duration]
+
+STOPPING current approach. Initiating problem decomposition protocol.
+```
+
+### Problem Decomposition Protocol
+
+**When circuit breaker activates, ALWAYS follow this protocol:**
+
+#### Step 1: Problem Analysis Reset
+- **Stop current approach immediately**
+- **Summarize what has been attempted**
+- **Identify specific blocking points**
+- **List assumptions that may be incorrect**
+
+#### Step 2: Decomposition Strategy
+```
+DECOMPOSITION ANALYSIS:
+1. Core Problem: [Single sentence problem statement]
+2. Sub-problems identified: [List 3-5 smaller problems]
+3. Dependencies: [What depends on what]
+4. Minimum Viable Solution: [Simplest possible working version]
+5. Alternative Approaches: [2-3 completely different methods]
+```
+
+#### Step 3: Collaborative Decision Point
+**Present options to user:**
+- **Option A**: Continue with simplified approach
+- **Option B**: Switch to alternative method
+- **Option C**: Take a break and return later
+- **Option D**: Seek additional information or clarification
+
+### Progress Validation Checkpoints
+
+**MANDATORY: Validate progress at regular intervals:**
+
+#### Every 3 Interactions
+- **Summarize progress made**
+- **Confirm we're moving toward solution**
+- **Check if approach is still valid**
+- **Ask user for feedback on direction**
+
+#### Every 15 Minutes
+- **Time check**: "We've been working on this for [X] minutes"
+- **Progress assessment**: "Here's what we've accomplished..."
+- **Path validation**: "Should we continue this approach or pivot?"
+
+#### Before Major Changes
+- **Impact assessment**: Files/systems that will be affected
+- **Rollback plan**: How to undo if approach fails
+- **Success criteria**: How we'll know it worked
+- **Alternative plan**: What to try if this doesn't work
+
+### Escalation Protocols
+
+**When problems persist despite safety measures:**
+
+#### Level 1: Approach Reset (After 3 failed attempts)
+- Switch to completely different implementation approach
+- Research alternative solutions or patterns
+- Consult documentation or external resources
+- Break problem into smaller, independent pieces
+
+#### Level 2: Scope Reduction (After 6 failed attempts)
+- Implement minimal viable solution first
+- Remove non-essential features temporarily
+- Focus on single core functionality
+- Plan incremental improvements later
+
+#### Level 3: Expert Consultation (After 9 failed attempts)
+- Recommend consulting documentation, Stack Overflow, or community resources
+- Suggest pair programming with human developer
+- Propose research phase before continuing implementation
+- Consider if problem requires domain-specific expertise
+
+#### Level 4: Session Pause (After 12 failed attempts)
+- **Mandatory break**: Stop all implementation work
+- **Document current state**: What was attempted, what failed
+- **Create resumption plan**: Steps for when work resumes
+- **Recommend timeline**: Suggest minimum break duration
+
+### Self-Monitoring Guidelines
+
+**CONTINUOUS: Monitor these indicators during collaboration:**
+
+#### Red Flags (Stop Immediately)
+- Repeating same suggestion after it failed
+- Increasing complexity instead of simplifying
+- Making assumptions without verification
+- Ignoring user feedback or constraints
+- Generating code without understanding requirements
+
+#### Yellow Flags (Slow Down and Reassess)
+- Multiple tool calls with same parameters
+- Long responses without clear progress
+- Technical jargon without user confirmation
+- Skipping workflow steps due to "efficiency"
+- Solutions that seem too complex for the problem
+
+#### Green Flags (Healthy Collaboration)
+- Clear progress toward defined goals
+- User engagement and feedback
+- Incremental improvements and validation
+- Appropriate tool usage and workflow adherence
+- Solutions that match problem complexity
+
+### Prevention Strategies
+
+**PROACTIVE: Implement these to prevent loops before they start:**
+
+#### Clear Communication
+- **Always confirm understanding** before implementation
+- **Ask clarifying questions** when requirements are vague
+- **Provide multiple options** instead of single solutions
+- **Explain trade-offs** of different approaches
+
+#### Structured Problem Solving
+- **Break complex requests** into smaller tasks
+- **Validate each step** before proceeding to next
+- **Test incrementally** rather than implementing everything at once
+- **Document decisions** and reasoning for future reference
+
+#### User Engagement
+- **Regular check-ins** during long implementations
+- **Progress updates** every few interactions
+- **Explicit approval requests** before major changes
+- **Feedback solicitation** on approach and progress
+
 ## Development Workflow Process
 
 ### Required Workflow for All Code Changes

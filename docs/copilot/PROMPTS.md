@@ -3,6 +3,78 @@
 ## Overview
 This document contains tested and effective prompt templates for common Flask development tasks with GitHub Copilot.
 
+## Problem Decomposition Prompts
+
+### Circuit Breaker Activation
+```
+🚨 I notice we're stuck in a loop or making repeated attempts without progress.
+
+Current situation:
+- Problem: [Brief description]
+- Attempts made: [Number and types of attempts]
+- Blocking factors: [What's preventing success]
+
+Let's reset and decompose this problem:
+1. What is the core issue we're trying to solve?
+2. What are the smaller sub-problems?
+3. What's the simplest version that could work?
+4. What alternative approaches haven't we tried?
+
+Please help me break this down into manageable pieces.
+```
+
+### Progress Validation
+```
+Let's pause and validate our progress:
+
+Time spent: [Duration]
+Interactions: [Number of back-and-forth exchanges]
+Completed: [What we've accomplished]
+Remaining: [What still needs to be done]
+Blockers: [Current obstacles]
+
+Questions:
+- Are we moving in the right direction?
+- Should we continue this approach or pivot?
+- Is there a simpler way to achieve the goal?
+- Do we need additional information or clarification?
+```
+
+### Approach Reset
+```
+I think we need to reset our approach for [problem description].
+
+What we've tried:
+- [Approach 1]: [Result]
+- [Approach 2]: [Result]
+- [Approach 3]: [Result]
+
+Let's try a completely different strategy:
+1. Research alternative patterns or solutions
+2. Simplify the requirements to core functionality
+3. Break into smaller, independent components
+4. Consider if we're solving the right problem
+
+What would you recommend as our next approach?
+```
+
+### Complexity Reduction
+```
+This problem seems more complex than initially expected.
+
+Current complexity indicators:
+- [Factor 1 making it complex]
+- [Factor 2 making it complex]
+- [Factor 3 making it complex]
+
+Simplification options:
+1. **Minimal Viable Solution**: [Simplest version that works]
+2. **Phase 1 Implementation**: [Core features only]
+3. **Proof of Concept**: [Basic functionality to validate approach]
+
+Which simplification approach would you prefer?
+```
+
 ## Core Development Prompts
 
 ### Feature Development

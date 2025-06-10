@@ -3,6 +3,78 @@
 ## Overview
 This document captures insights, best practices, and lessons learned from collaborating with GitHub Copilot on Flask development projects.
 
+## Loop Detection and Prevention Patterns
+
+### Identifying Collaboration Loops
+
+#### Warning Signs of Impending Loops
+1. **Repetitive Suggestions**: AI suggests same solution after it failed
+2. **Complexity Creep**: Solutions become more complex instead of simpler
+3. **Assumption Loops**: Making assumptions without validation
+4. **Tool Repetition**: Using same tools repeatedly without success
+5. **Scope Expansion**: Problem keeps growing instead of being solved
+
+#### Common Loop Patterns Encountered
+
+##### Pattern 1: The "Just Try This" Loop
+**Symptom**: Repeated attempts with minor variations
+**Example**: 
+- Try approach A → fails
+- Try approach A with small change → fails  
+- Try approach A with different parameters → fails
+**Solution**: Completely abandon approach A, research alternatives
+
+##### Pattern 2: The "Complexity Spiral"
+**Symptom**: Each attempt adds more complexity
+**Example**:
+- Simple authentication → fails
+- Add sessions → fails
+- Add database → fails
+- Add caching → fails
+**Solution**: Return to simplest possible implementation
+
+##### Pattern 3: The "Assumption Chain"
+**Symptom**: Building solutions on unverified assumptions
+**Example**:
+- Assume user wants feature X
+- Build complex solution for X
+- Discover user actually wanted Y
+**Solution**: Validate assumptions before implementation
+
+##### Pattern 4: The "Tool Hammer" Loop
+**Symptom**: Using same tool repeatedly for different problems
+**Example**:
+- Database query slow → add index
+- Still slow → add different index
+- Still slow → add more indexes
+**Solution**: Step back and analyze if database optimization is the right approach
+
+#### Prevention Strategies That Work
+
+##### Strategy 1: The "Three Strike Rule"
+- After 3 failed attempts with same approach, mandatory reset
+- Document what was tried and why it failed
+- Research completely different approaches
+- Get user input on new direction
+
+##### Strategy 2: The "Simplicity First" Principle
+- Always start with simplest possible solution
+- Add complexity only when simple solution is proven insufficient
+- Remove features rather than add them when stuck
+- Focus on core functionality first
+
+##### Strategy 3: The "Progress Checkpoint" System
+- Every 3 interactions: summarize progress made
+- Every 15 minutes: validate approach is still correct
+- Before major changes: confirm impact and rollback plan
+- At circuit breaker: full problem decomposition
+
+##### Strategy 4: The "Alternative Research" Protocol
+- When stuck, stop implementing and start researching
+- Look for different patterns, libraries, or approaches
+- Consult documentation and community resources
+- Present multiple options to user before continuing
+
 ## Key Insights
 
 ### Communication Patterns That Work
