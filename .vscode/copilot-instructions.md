@@ -337,6 +337,96 @@ Follow this structure:
 - Document configuration changes and their impacts
 - Provide examples of different environment configurations
 
+### Documentation Files Update Protocol
+
+**MANDATORY: When making any changes, update ALL relevant documentation files in `docs/` folder:**
+
+#### Core Documentation Files (Always Review)
+1. **`docs/README.md`** - Main project documentation
+   - Update getting started instructions if setup changes
+   - Modify feature descriptions for new capabilities
+   - Update troubleshooting section for new issues
+   - Refresh project structure if architecture changes
+   - Update extension recommendations if tools change
+
+2. **`docs/API.md`** - API documentation  
+   - Add new endpoints with complete examples
+   - Update existing endpoint documentation for changes
+   - Include authentication requirements for new endpoints
+   - Document new error responses and status codes
+   - Update rate limiting information if applicable
+   - Add request/response examples for all changes
+
+3. **`docs/CHANGELOG.md`** - Change tracking
+   - Add entry to [Unreleased] section for every change
+   - Include Copilot session details for AI-assisted changes
+   - Document breaking changes with migration notes
+   - Update version notes when releasing
+   - Track dependency updates and their impacts
+
+4. **`docs/DEVELOPMENT.md`** - Development setup and workflow
+   - Update setup instructions for new dependencies
+   - Modify environment variable documentation
+   - Update testing procedures for new test types
+   - Add troubleshooting for new common issues
+   - Update directory structure if files are added/moved
+
+5. **`docs/DEPLOYMENT.md`** - Production deployment
+   - Update deployment steps for infrastructure changes
+   - Modify configuration examples for new settings
+   - Update backup procedures for new data types
+   - Add performance optimization notes for new features
+   - Update security considerations for new endpoints
+
+6. **`docs/COPILOT.md`** - AI collaboration guide
+   - Update workflow integration for new procedures
+   - Add maintenance instructions for new practices
+   - Update best practices based on learnings
+   - Modify troubleshooting for new AI collaboration issues
+
+#### Copilot Knowledge Base Files (Update After AI Sessions)
+7. **`docs/copilot/INTERACTIONS.md`** - Collaboration patterns
+   - Add successful interaction examples after each session
+   - Document new conversation templates that work well
+   - Update success metrics and quality assessments
+   - Add workflow examples for new development procedures
+
+8. **`docs/copilot/PROMPTS.md`** - Effective prompts
+   - Add new prompt templates discovered during development
+   - Update existing prompts based on effectiveness
+   - Add documentation-specific prompts for new file types
+   - Include maintenance prompts for new tools or procedures
+
+9. **`docs/copilot/LESSONS.md`** - AI insights and learnings
+   - Document new insights gained from AI collaboration
+   - Add best practices discovered during development
+   - Update troubleshooting patterns for new issues
+   - Include performance tips for new AI interaction patterns
+
+#### Documentation Update Checklist
+**For EVERY development task, check these items:**
+
+- [ ] **README.md**: Does this change affect getting started, features, or troubleshooting?
+- [ ] **API.md**: Are there new/modified endpoints, authentication, or error responses?
+- [ ] **CHANGELOG.md**: Has an entry been added with proper categorization and Copilot session details?
+- [ ] **DEVELOPMENT.md**: Do setup, testing, or workflow procedures need updates?
+- [ ] **DEPLOYMENT.md**: Are there infrastructure, configuration, or security changes?
+- [ ] **COPILOT.md**: Do AI collaboration workflows or best practices need updates?
+- [ ] **Copilot Knowledge Base**: Should successful patterns/prompts/lessons be captured?
+
+#### Documentation Quality Standards
+- **Consistency**: Use same formatting and style across all docs
+- **Completeness**: Include examples, error cases, and edge scenarios
+- **Currency**: Ensure all information reflects current state
+- **Cross-references**: Link between related sections in different files
+- **Searchability**: Use clear headings and keywords for easy navigation
+
+#### Documentation Testing
+- **Links**: Verify all internal and external links work
+- **Examples**: Test all code examples and commands
+- **Accuracy**: Ensure all information matches actual implementation
+- **Formatting**: Check Markdown rendering and syntax highlighting
+
 ## Security Requirements
 
 ### Always Implement
