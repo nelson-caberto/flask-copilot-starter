@@ -3,51 +3,60 @@
 ## Overview
 This is a Flask web application starter template optimized for development with GitHub Copilot. The project follows Flask best practices and includes comprehensive documentation.
 
-## Getting Started
+## 🚀 **Quick Start** (< 10 minutes)
 
-### 1. Fork and Clone the Repository
-
-#### Fork on GitHub
-1. **Navigate to the repository** on GitHub
-2. **Click the "Fork" button** in the top-right corner
-3. **Select your account** as the destination for the fork
-4. **Wait for GitHub** to create your personal copy
-
-#### Clone Your Fork
+### 1. **Fork & Clone** (2 minutes)
 ```bash
-# Replace YOUR_USERNAME with your GitHub username
+# Fork on GitHub → Clone your fork → Navigate to project
 git clone https://github.com/YOUR_USERNAME/flask-copilot-starter.git
-
-# Navigate to the project directory
 cd flask-copilot-starter
-
-# Add the original repository as upstream (for future updates)
 git remote add upstream https://github.com/ORIGINAL_OWNER/flask-copilot-starter.git
 ```
 
-### 2. Set Up VS Code with GitHub Copilot
+### 2. **Setup VS Code + Copilot** (3 minutes)
+```bash
+# Open in VS Code
+code .
 
-#### Install Required Extensions
-1. **Open VS Code**
-2. **Install GitHub Copilot extension**:
-   - Open Extensions panel (`Cmd+Shift+X` on macOS)
-   - Search for "GitHub Copilot"
-   - Click "Install" on the official GitHub Copilot extension
-   - Click "Install" on "GitHub Copilot Chat" as well
+# Install extensions (if not already installed):
+# - GitHub Copilot
+# - GitHub Copilot Chat
+# - Python (recommended)
+```
 
-#### Authenticate GitHub Copilot
-1. **Sign in to GitHub**:
-   - Open Command Palette (`Cmd+Shift+P`)
-   - Type "GitHub Copilot: Sign In"
-   - Follow the authentication flow
-   - Authorize VS Code to access your GitHub account
+### 3. **Configure AI Model** (2 minutes)
+**⚠️ CRITICAL**: AI models don't auto-read project guidelines. Use this prompt:
 
-#### Verify Copilot is Active
-1. **Check status bar**: Look for Copilot icon in bottom-right corner
-2. **Test completion**: Create a new file and start typing Python code
-3. **Check chat**: Open Copilot Chat panel (`Cmd+Shift+I`)
+```
+Before we start, please read these files to understand this project:
 
-### 3. Configure Copilot for This Project
+1. Read `.vscode/copilot-instructions.md` - Contains the complete development guidelines, safety protocols, and mandatory 8-step workflow for this Flask project.
+
+2. Read all files in `docs/` directory - Understand project structure, documentation standards, and what needs updating when making changes.
+
+After reading, please confirm: "I have read the project guidelines and commit to following all instructions, workflows, and safety protocols."
+
+Once confirmed, we can begin development.
+```
+
+### 4. **First Development Task** (3 minutes)
+```
+I want to create a basic Flask application following this project's patterns.
+
+Please use the 8-step workflow:
+1. Check git status
+2. Analyze requirements (max 5 minutes)
+3. Get my approval for approach
+4. Implement with Flask-Migrate if database changes
+5. Create comprehensive tests
+6. Clean up workspace
+7. Update documentation
+8. Git commit
+
+Start now - use the simplest Flask patterns and don't overthink it.
+```
+
+## ⚡ **Ready to Code?** Jump to [Development Guide](./DEVELOPMENT.md)
 
 #### Open Project in VS Code
 ```bash
@@ -165,31 +174,25 @@ See [DEVELOPMENT.md](./DEVELOPMENT.md) for detailed setup instructions.
 - [Prompt Templates](./copilot/PROMPTS.md) - Effective prompts for common tasks
 - [Lessons Learned](./copilot/LESSONS.md) - Best practices and insights
 
-## Features
+## ⚡ **Key Features**
 
-### 🤖 **AI-Powered Development**
-- **Custom Copilot Instructions**: Pre-configured guidelines for Flask best practices
-- **Safety System**: Loop detection and circuit breakers prevent AI deadlocks
-- **Prompt Templates**: Proven prompts for common Flask development tasks
-- **Interaction Examples**: Real collaboration patterns with success metrics
+### 🤖 **Speed-Optimized AI Development**
+- **10-minute analysis limits** - No decision paralysis
+- **Time-boxed workflows** - Ship code in 30 minutes or less  
+- **Auto-proceed rules** - Keep development moving forward
+- **Emergency decision protocols** - Break analysis loops instantly
 
-### 🛡️ **Built-in Safety & Quality**
-- **8-Step Workflow**: Mandatory process ensuring code quality and documentation
-- **Automatic Testing**: Comprehensive test structure with 90%+ coverage requirements
-- **Security Focus**: CSRF protection, input validation, and secure session handling
-- **Database Safety**: Production database protection and test isolation
+### 🛡️ **Quality Without Slowdown**
+- **8-step workflow** - Ensures quality while maintaining speed
+- **90%+ test coverage** - Quality built-in, not bolted-on
+- **Flask-Migrate integration** - Database changes handled immediately
+- **Production-ready patterns** - Security and best practices included
 
-### 📚 **Comprehensive Documentation**
-- **Live Knowledge Base**: Documentation that evolves with your project
-- **Collaboration Tracking**: Record and learn from AI interactions
-- **Best Practices**: Captured lessons from successful Flask development
-- **Maintenance Guides**: Keep documentation current with code changes
-
-### 🏗️ **Professional Architecture**
-- **Application Factory Pattern**: Scalable Flask application structure
-- **Blueprint Organization**: Modular routing and feature separation
-- **Environment Management**: Pipenv-based dependency and environment control
-- **Production Ready**: Deployment guides and configuration management
+### 📚 **Living Documentation**
+- **Decision framework** - Make choices in under 10 minutes
+- **Prompt templates** - Proven patterns for common tasks
+- **Anti-paralysis system** - Keep projects moving forward
+- **Success metrics** - Track and improve development velocity
 
 ## Architecture
 This Flask application uses:

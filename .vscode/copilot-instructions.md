@@ -206,6 +206,11 @@ DECOMPOSITION ANALYSIS:
    - Follow all coding standards and security requirements outlined in these instructions
    - Include comprehensive error handling and logging
    - Add detailed docstrings and comments
+   - **Database Model Changes**: If modifying SQLAlchemy models, IMMEDIATELY run Flask-Migrate workflow:
+     - Generate migration: `pipenv run flask db migrate -m "Description"`
+     - Review migration file in `migrations/versions/`
+     - Apply migration: `pipenv run flask db upgrade`
+     - Test that migration works correctly
 
 5. **Comprehensive Testing**: Create or update tests for all changes
    - Write unit tests for new functions and classes
@@ -257,23 +262,26 @@ DECOMPOSITION ANALYSIS:
 
 **MANDATORY: Apply these rules to prevent decision delays:**
 
-#### Time-Boxing Rules
-- **Analysis Phase**: Maximum 10 minutes per request
-- **Option Generation**: Maximum 3 approaches per decision point  
-- **Approval Wait**: Maximum 5 minutes before defaulting to simplest approach
+#### Time-Boxing Rules (STRICTLY ENFORCED)
+- **Analysis Phase**: Maximum 10 minutes per request - SET TIMER
+- **Option Generation**: Maximum 2-3 approaches per decision point (NO MORE)
+- **Approval Wait**: Maximum 5 minutes before auto-proceeding with simplest approach
 - **Research**: Maximum 15 minutes before presenting findings and proceeding
+- **Flask-Migrate**: IMMEDIATE generation when models change (NO DELAYS)
 
 #### Decision Hierarchy (When Multiple Options Exist)
-1. **Simplest working solution** (preferred default)
-2. **Established pattern** from existing codebase
-3. **Industry standard** approach
-4. **Custom solution** (only if 1-3 are insufficient)
+1. **Simplest working solution** (preferred default - choose this 80% of the time)
+2. **Established pattern** from existing codebase (follow existing code)
+3. **Industry standard** approach (Flask best practices)
+4. **Custom solution** (only if 1-3 are insufficient - requires justification)
 
-#### Quick Decision Triggers
-- **Low-risk changes**: Proceed with best judgment if no user response in 5 minutes
-- **Standard patterns**: Use established codebase patterns without extensive analysis
-- **Maintenance tasks**: Default to existing code style and patterns
-- **Testing**: Follow existing test patterns and structures
+#### Quick Decision Triggers (USE THESE TO AVOID PARALYSIS)
+- **Low-risk changes**: Auto-proceed after 3 minutes if no user response
+- **Standard patterns**: Use established codebase patterns WITHOUT analysis
+- **Maintenance tasks**: Default to existing code style and patterns IMMEDIATELY  
+- **Testing**: Follow existing test patterns and structures WITHOUT discussion
+- **Flask-Migrate**: Generate migration IMMEDIATELY when models change
+- **Documentation updates**: Follow existing format and structure patterns
 
 #### Complexity Escalation Rules
 - Start with minimal viable implementation
@@ -626,6 +634,68 @@ class FlaskExtensionName:
 - Use proper foreign key constraints
 - Include __repr__ methods for debugging
 - Use Flask-Migrate for schema changes
+
+### Flask-Migrate Workflow Requirements
+
+**MANDATORY: When ANY database model is touched, IMMEDIATELY execute this workflow:**
+
+#### Model Creation Workflow (NO DELAYS)
+```bash
+# 1. Create model → 2. Generate migration → 3. Apply → 4. Test → 5. Commit
+pipenv run flask db migrate -m "Add [ModelName] model"
+pipenv run flask db upgrade
+# Test app runs → Commit changes
+```
+
+#### Model Modification Workflow (NO DELAYS)  
+```bash
+# 1. Modify model → 2. Generate migration → 3. Apply → 4. Test → 5. Commit
+pipenv run flask db migrate -m "Update [ModelName] - [brief description]"
+pipenv run flask db upgrade
+# Test app runs → Commit changes
+```
+
+#### Model Deletion Workflow (BACKUP FIRST)
+```bash
+# 1. BACKUP DB → 2. Remove from model → 3. Generate migration → 4. Apply → 5. Test → 6. Commit
+pipenv run flask db migrate -m "Remove [field/model] from [ModelName]"
+pipenv run flask db upgrade
+# Test on backup data first → Commit changes
+```
+
+#### Anti-Paralysis Rules for Migrations
+- **NO analysis phase** - just generate the migration immediately
+- **NO option generation** - Flask-Migrate is the standard approach  
+- **NO approval wait** - migrations are mandatory for model changes
+- **AUTO-PROCEED** if user doesn't respond within 2 minutes
+
+#### Migration Safety Rules
+- **NEVER modify existing migration files** - always create new ones
+- **ALWAYS review generated migrations** before applying
+- **TEST migrations on copy of production data** for destructive changes
+- **BACKUP database** before applying migrations in production
+- **Keep migrations small and focused** - one logical change per migration
+
+#### Error Recovery
+If migration fails:
+```bash
+# Rollback to previous migration
+pipenv run flask db downgrade
+
+# Fix the issue in model or migration
+# Generate new migration if needed
+pipenv run flask db migrate -m "Fix [issue description]"
+
+# Apply corrected migration
+pipenv run flask db upgrade
+```
+
+#### Migration Workflow Integration
+**This workflow MUST be integrated into the main development workflow:**
+- Step 4 (Implementation): Include migration generation when models change
+- Step 5 (Testing): Test that migrations work correctly
+- Step 7 (Documentation): Document schema changes in CHANGELOG.md
+- Step 8 (Git Commit): Include both model and migration files
 
 ### Database Operations
 - Always use database transactions appropriately

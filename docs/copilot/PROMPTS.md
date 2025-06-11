@@ -1,26 +1,63 @@
 # Copilot Prompt Templates
 
-## Overview
-This document contains tested and effective prompt templates for common Flask development tasks with GitHub Copilot.
+## ⚡ **SPEED-FIRST PROMPTS** - Anti-Analysis Paralysis
 
-## Problem Decomposition Prompts
+## Quick Decision Prompts (Use These First)
+
+### ⚡ Immediate Action Prompt
+```
+I need to [specific task]. Please provide the simplest solution that works and implement it immediately.
+
+Requirements:
+- [Requirement 1]
+- [Requirement 2]
+- [Requirement 3]
+
+Don't analyze multiple approaches - just use the most standard Flask pattern and proceed.
+Follow the established patterns in this codebase.
+```
+
+### ⚡ Copy Pattern Prompt  
+```
+I need to [task] similar to [existing functionality in codebase].
+
+Please:
+1. Find the existing pattern for [similar functionality]
+2. Copy and adapt it for [new requirement]
+3. Implement immediately without analysis
+
+Use exactly the same structure and patterns as the existing code.
+```
+
+### ⚡ Emergency Decision Prompt
+```
+We've been analyzing this for [time] and need to make a decision NOW.
+
+Problem: [One sentence problem statement]
+Context: [Brief context]
+
+Please choose the simplest standard Flask approach and implement it.
+No analysis needed - just pick the most obvious solution and proceed.
+```
+
+## Problem Decomposition Prompts (When Stuck)
 
 ### Circuit Breaker Activation
 ```
-🚨 I notice we're stuck in a loop or making repeated attempts without progress.
+🚨 ANALYSIS PARALYSIS DETECTED - Activating circuit breaker
 
 Current situation:
 - Problem: [Brief description]
-- Attempts made: [Number and types of attempts]
-- Blocking factors: [What's preventing success]
+- Time spent: [Duration]
+- Attempts made: [Number of attempts]
 
-Let's reset and decompose this problem:
-1. What is the core issue we're trying to solve?
-2. What are the smaller sub-problems?
-3. What's the simplest version that could work?
-4. What alternative approaches haven't we tried?
+STOPPING current approach. Please:
+1. State the core problem in ONE sentence
+2. Identify the simplest solution that could work
+3. Implement that solution immediately
+4. NO analysis phase - just proceed
 
-Please help me break this down into manageable pieces.
+Use the emergency decision protocol from DECISION_FRAMEWORK.md
 ```
 
 ### Progress Validation

@@ -1,54 +1,38 @@
 # GitHub Copilot Collaboration Guide
 
-## Overview
-This guide documents best practices for collaborating with GitHub Copilot on Flask development projects. It covers both Flask applications and Flask extensions, including proven interaction patterns, effective prompts, and maintenance workflows.
+## ⚡ **Speed-First Collaboration**
 
-## Quick Reference
+### Essential Copilot Commands (< 30 seconds each)
+- **Quick implementation**: "Use the simplest Flask pattern and implement now"
+- **Copy existing**: "Find similar code in the project and adapt it for [task]"  
+- **Emergency decision**: "We need to decide now - choose the standard approach"
+- **Auto-proceed**: "No response needed - proceed with the obvious solution"
 
-### Essential Copilot Commands
-- **Request permission**: "Can I create/modify [filename]?"
-- **Analyze before action**: "What would be the best approach for [task]?"
-- **Follow workflow**: Always follow the 8-step development workflow
-- **Update docs**: "Please update documentation for this change"
+### ⚡ High-Velocity Patterns
+1. **Analysis time-limit**: Set 5-minute timer for any analysis
+2. **Option limit**: Max 2 implementation choices
+3. **Default to simple**: Choose obvious Flask patterns first
+4. **Ship and iterate**: Working code beats perfect code
+5. **Copy patterns**: Reuse existing code structures when possible
 
-### Effective Collaboration Patterns
-1. **Start with analysis**: Ask Copilot to analyze requirements before implementation
-2. **Request options**: "Suggest multiple approaches for [task]"
-3. **Verify understanding**: "Please confirm my understanding of [requirement]"
-4. **Incremental development**: Break complex tasks into smaller steps
-5. **Documentation-driven**: Update docs with every code change
+## Speed-Optimized Workflow
 
-## Documentation Structure
+### ⚡ Pre-Development (< 5 minutes)
+1. **Git check** (30 seconds) - Ensure clean working directory
+2. **Quick analysis** (3 minutes) - Identify simplest approach
+3. **Choice made** (90 seconds) - Pick standard Flask pattern
 
-### Copilot Knowledge Base
-- [Interaction Examples](./copilot/INTERACTIONS.md) - Successful conversation patterns
-- [Prompt Templates](./copilot/PROMPTS.md) - Effective prompts for common tasks
-- [Decision Framework](./copilot/DECISION_FRAMEWORK.md) - Quick decision-making guides
-- [Lessons Learned](./copilot/LESSONS.md) - Best practices and insights
+### ⚡ Development Phase (< 25 minutes)
+1. **Implement** (15 minutes) - Use established patterns
+2. **Test** (5 minutes) - Copy existing test structure  
+3. **Document** (3 minutes) - Update relevant docs
+4. **Commit** (2 minutes) - Standard commit message
 
-### Integration Points
-- [CHANGELOG.md](./CHANGELOG.md) - Includes Copilot interaction history
-- [DEVELOPMENT.md](./DEVELOPMENT.md) - AI-assisted development workflow
-- [.vscode/copilot-instructions.md](../.vscode/copilot-instructions.md) - Core Copilot guidelines
-
-## Workflow Integration
-
-### Pre-Development Phase
-1. **Git Status Check**: Ensure clean working directory
-2. **Requirement Analysis**: Discuss approaches with Copilot (MAX 10 minutes)
-3. **Planning Session**: Break down tasks and identify files to modify
-4. **Quick Decisions**: Use decision framework for standard patterns
-
-### Development Phase
-1. **Approval Workflow**: Get explicit permission before file operations
-2. **Incremental Implementation**: Make changes in logical steps
-3. **Real-time Documentation**: Update docs as code evolves
-4. **Time-boxed Analysis**: Limit analysis to prevent decision paralysis
-
-### Post-Development Phase
-1. **Test Generation**: Create comprehensive tests with Copilot
-2. **Documentation Review**: Ensure all docs are current
-3. **Knowledge Capture**: Document interaction patterns that worked well
+### ⚡ Anti-Paralysis Rules
+- **NO analysis loops** - Make decision and proceed
+- **NO perfect-seeking** - Ship working solution
+- **NO option overload** - Max 2 choices ever
+- **NO extended research** - Use what exists in Flask ecosystem
 4. **Decision Pattern Updates**: Update decision framework with new patterns
 5. **Copilot Knowledge Base Updates**: Save successful interactions, prompts, and lessons to knowledge base files
 
