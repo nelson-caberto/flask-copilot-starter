@@ -500,7 +500,7 @@ Please help me correct the configuration.
 - Gather feedback from team members on prompt effectiveness
 - Update based on new Copilot capabilities or Flask best practices
 
-*Last updated: June 10, 2025 - Initial template creation**
+*Last updated: June 11, 2025 - Added anti-paralysis prompts and time-boxing templates*
 
 ## Flask Extension Development Prompts
 
@@ -591,4 +591,57 @@ Extension Details:
 - Configuration: [Current configuration]
 
 Please help me debug this extension issue.
+```
+
+## Anti-Paralysis Prompts
+
+### Quick Decision Prompt
+```
+Let's avoid analysis paralysis here. I need a working solution in the next 15 minutes.
+
+Requirements (core only):
+- [Core requirement 1]
+- [Core requirement 2]  
+- [Core requirement 3]
+
+Constraints:
+- Use existing patterns from this codebase
+- Prefer established Flask libraries
+- Start with simplest implementation
+
+Just give me your recommended approach and let's implement it. We can iterate later.
+```
+
+### Default Choice Prompt  
+```
+I'm seeing multiple options here. Let's use the default approach:
+
+For [problem type]:
+- Standard Flask pattern: [pattern name]
+- Established library: [library name]
+- Existing codebase pattern: [reference to similar code]
+
+Proceed with this standard approach unless there's a clear reason it won't work.
+```
+
+### Time-Box Reset Prompt
+```
+We've been analyzing this for [time]. Let's reset:
+
+Core problem: [one sentence]
+Simplest solution: [basic approach]
+Time limit: [15 minutes max]
+
+Stop analyzing, start implementing. We'll improve it once it works.
+```
+
+### Circuit Breaker Override Prompt
+```
+Analysis paralysis detected. Switching to emergency decision mode:
+
+1. What's the simplest thing that could possibly work?
+2. What patterns already exist in this codebase?
+3. What's the most standard Flask approach?
+
+Choose option [1/2/3] and implement it now. No more analysis.
 ```

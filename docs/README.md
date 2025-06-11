@@ -131,7 +131,8 @@ Copilot will analyze the project structure, review the dependency requirements f
 1. **Read the safety protocols**: Check `.vscode/copilot-instructions.md`
 2. **Review examples**: Browse `docs/copilot/INTERACTIONS.md`
 3. **Use templates**: Reference `docs/copilot/PROMPTS.md` for effective prompts
-4. **Follow workflow**: Always use the 8-step development process
+4. **Check decision guides**: Review `docs/copilot/DECISION_FRAMEWORK.md` for quick decisions
+5. **Follow workflow**: Always use the 8-step development process
 
 #### First Development Task Example
 Try this prompt with Copilot to test the full workflow:
@@ -228,8 +229,9 @@ flask-copilot-starter/
 - **No custom instructions?** Ensure `.vscode/copilot-instructions.md` exists in your workspace
 - **Safety features unclear?** Review the AI safety system in the instructions file
 - **Need examples?** Check the interaction patterns in `docs/copilot/INTERACTIONS.md`
+- **Decision paralysis?** Use the quick decision guides in `docs/copilot/DECISION_FRAMEWORK.md`
 - **Environment setup issues?** Use the Pipenv setup prompt in the [First Steps section](#set-up-development-environment-with-copilot)
 - **Pipenv not working?** Ensure Python 3.8+ is installed and Pipenv is available (`pip install pipenv`)
 
 ---
-*Last updated: June 10, 2025*
+*Last updated: June 11, 2025*

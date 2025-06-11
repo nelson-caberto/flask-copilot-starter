@@ -97,5 +97,5 @@ def test_extension_api():
 ```
 
 ---
-*Last updated: June 10, 2025*
-*Version: 0.1.0*
+*Last updated: June 11, 2025*
+*Update this documentation whenever API endpoints are added, modified, or removed.*

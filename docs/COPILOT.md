@@ -23,6 +23,7 @@ This guide documents best practices for collaborating with GitHub Copilot on Fla
 ### Copilot Knowledge Base
 - [Interaction Examples](./copilot/INTERACTIONS.md) - Successful conversation patterns
 - [Prompt Templates](./copilot/PROMPTS.md) - Effective prompts for common tasks
+- [Decision Framework](./copilot/DECISION_FRAMEWORK.md) - Quick decision-making guides
 - [Lessons Learned](./copilot/LESSONS.md) - Best practices and insights
 
 ### Integration Points
@@ -34,19 +35,22 @@ This guide documents best practices for collaborating with GitHub Copilot on Fla
 
 ### Pre-Development Phase
 1. **Git Status Check**: Ensure clean working directory
-2. **Requirement Analysis**: Discuss approaches with Copilot
+2. **Requirement Analysis**: Discuss approaches with Copilot (MAX 10 minutes)
 3. **Planning Session**: Break down tasks and identify files to modify
+4. **Quick Decisions**: Use decision framework for standard patterns
 
 ### Development Phase
 1. **Approval Workflow**: Get explicit permission before file operations
 2. **Incremental Implementation**: Make changes in logical steps
 3. **Real-time Documentation**: Update docs as code evolves
+4. **Time-boxed Analysis**: Limit analysis to prevent decision paralysis
 
 ### Post-Development Phase
 1. **Test Generation**: Create comprehensive tests with Copilot
 2. **Documentation Review**: Ensure all docs are current
 3. **Knowledge Capture**: Document interaction patterns that worked well
-4. **Copilot Knowledge Base Updates**: Save successful interactions, prompts, and lessons to knowledge base files
+4. **Decision Pattern Updates**: Update decision framework with new patterns
+5. **Copilot Knowledge Base Updates**: Save successful interactions, prompts, and lessons to knowledge base files
 
 ## Maintenance Instructions
 
@@ -79,11 +83,13 @@ This guide documents best practices for collaborating with GitHub Copilot on Fla
 - **Test thoroughly**: Include edge cases and comprehensive coverage
 - **Document everything**: Keep all documentation current
 - **Review suggestions**: Critically evaluate Copilot's proposals
+- **Quick decisions**: Use decision framework to avoid analysis paralysis
 
 ### Knowledge Management
 - **Capture learnings**: Document successful interaction patterns
 - **Share insights**: Update team knowledge base regularly
 - **Iterate on prompts**: Refine prompts based on results
+- **Update frameworks**: Keep decision patterns current
 - **Track evolution**: Monitor how collaboration improves over time
 - **Save interactions**: Add successful patterns to INTERACTIONS.md, effective prompts to PROMPTS.md, and insights to LESSONS.md
 
@@ -103,13 +109,15 @@ This guide documents best practices for collaborating with GitHub Copilot on Fla
 - **Unclear responses**: Provide more specific context and requirements
 - **Incomplete implementations**: Break tasks into smaller, specific steps
 - **Missing documentation**: Explicitly request documentation updates
+- **Analysis paralysis**: Use decision framework for quick choices
 
 ### Getting Help
 - Check [LESSONS.md](./copilot/LESSONS.md) for solutions to common problems
 - Review [INTERACTIONS.md](./copilot/INTERACTIONS.md) for successful patterns
 - Consult [PROMPTS.md](./copilot/PROMPTS.md) for effective communication templates
+- Use [DECISION_FRAMEWORK.md](./copilot/DECISION_FRAMEWORK.md) for quick decision-making
 
 ---
 
-*Last updated: June 10, 2025*
+*Last updated: June 11, 2025*
 *This guide evolves with your project. Update it regularly to capture new insights and improve collaboration effectiveness.*

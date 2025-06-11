@@ -129,6 +129,32 @@ rm app.db
 pipenv run flask db upgrade
 ```
 
+## Decision Framework Integration
+Use the decision framework to avoid analysis paralysis:
+
+#### Quick Decisions (< 2 minutes)
+- Code style and formatting → Follow existing patterns
+- Standard operations (CRUD, routing) → Use established patterns
+- Testing approach → Follow current test structure
+
+#### Standard Decisions (< 10 minutes)  
+- New features → Break into smallest components, start simple
+- Database changes → Use Alembic migrations, follow model patterns
+- API design → Follow existing API structure and conventions
+
+#### Decision Hierarchy
+1. **Simplest working solution** (preferred default)
+2. **Established pattern** from existing codebase  
+3. **Industry standard** approach
+4. **Custom solution** (only if 1-3 insufficient)
+
+#### Emergency Decision Protocol
+If stuck in analysis:
+1. Stop analysis immediately
+2. Choose simplest approach that could work
+3. Implement and iterate
+4. Refer to `docs/copilot/DECISION_FRAMEWORK.md` for detailed guidance
+
 ## Testing Guidelines
 
 ### Test Database
@@ -199,6 +225,57 @@ git commit -m "Add new feature with tests and documentation"
 # Push and create pull request
 ```
 
+## AI Collaboration Workflow
+
+### Time-Boxed Development Process
+Following the enhanced 8-step workflow with analysis paralysis prevention:
+
+#### Pre-Development (Steps 1-3)
+```bash
+# 1. Git Status Check (MANDATORY)
+git status
+
+# 2. Analysis Phase (MAX 10 minutes)
+# - Request analysis from Copilot
+# - Limit to 2-3 approaches maximum
+# - Focus on simplest viable solution first
+
+# 3. Approval Phase (MAX 5 minutes)
+# - Get explicit approval for chosen approach
+# - Auto-proceed rule for low-risk changes after 5 minutes
+```
+
+#### Development (Steps 4-6)
+```bash
+# 4. Implementation
+# - Follow approved plan
+# - Include comprehensive error handling
+# - Add detailed docstrings
+
+# 5. Testing
+pipenv run pytest --cov=app
+
+# 6. Cleanup and Verification
+# - Remove temporary files
+# - Reset test database
+# - Validate clean state
+```
+
+#### Documentation (Steps 7-8)
+```bash
+# 7. Documentation Updates
+# - Update API docs, README, DEVELOPMENT, CHANGELOG
+# - Save to Copilot knowledge base:
+#   - docs/copilot/INTERACTIONS.md
+#   - docs/copilot/PROMPTS.md
+#   - docs/copilot/LESSONS.md
+#   - docs/copilot/DECISION_FRAMEWORK.md
+
+# 8. Git Commit
+git add .
+git commit -m "feat: description of changes"
+```
+
 ## Environment Variables
 
 ### Required Variables
@@ -228,6 +305,15 @@ flask-copilot-starter/
 │   ├── integration/        # Integration tests
 │   └── functional/         # Functional tests
 ├── docs/                   # Documentation
+│   ├── copilot/           # AI collaboration knowledge base
+│   │   ├── DECISION_FRAMEWORK.md # Quick decision guidelines
+│   │   ├── INTERACTIONS.md       # Successful patterns
+│   │   ├── PROMPTS.md           # Effective templates
+│   │   └── LESSONS.md           # Best practices
+│   ├── README.md          # Project overview
+│   ├── DEVELOPMENT.md     # This file
+│   ├── CHANGELOG.md       # Change history
+│   └── COPILOT.md         # AI collaboration guide
 ├── migrations/             # Database migrations
 ├── Pipfile                 # Dependencies
 └── run.py                  # Application entry point
@@ -247,6 +333,12 @@ flask-extension-name/
 │   ├── test_integration.py # Integration tests
 │   └── test_app.py         # Sample test application
 ├── docs/                   # Documentation
+│   ├── copilot/           # AI collaboration knowledge base
+│   │   ├── DECISION_FRAMEWORK.md # Quick decision guidelines  
+│   │   ├── INTERACTIONS.md       # Successful patterns
+│   │   ├── PROMPTS.md           # Effective templates
+│   │   └── LESSONS.md           # Best practices
+│   └── API.md             # Extension API documentation
 ├── examples/               # Usage examples
 ├── setup.py                # Package configuration
 ├── MANIFEST.in             # Package manifest
@@ -255,4 +347,7 @@ flask-extension-name/
 ```
 
 ---
+
+*Last updated: June 11, 2025*
+*This guide evolves with the project. Update it regularly to reflect new patterns and workflows.*
 *Last updated: June 10, 2025*

@@ -259,4 +259,5 @@ sudo systemctl restart flask-app
 - Monitor response times
 
 ---
-*Last updated: June 10, 2025*
+*Last updated: June 11, 2025*
+*Update this guide when deployment processes or infrastructure requirements change.*

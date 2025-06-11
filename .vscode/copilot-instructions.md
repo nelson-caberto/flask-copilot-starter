@@ -1,3 +1,4 @@
+````instructions
 # Flask Development Copilot Instructions
 
 ## Project Context
@@ -183,17 +184,21 @@ DECOMPOSITION ANALYSIS:
    - If there are uncommitted changes, stop and ask user to commit or stash them first
    - Never proceed with new work when there are pending changes
 
-2. **Analysis and Suggestions**: Analyze the request and provide options
+2. **Analysis and Suggestions**: Analyze the request and provide focused options (MAX 10 minutes)
    - Break down the request into specific tasks and components
-   - Suggest multiple implementation approaches when applicable
+   - **Limit to 2-3 approaches maximum** - more options create decision paralysis
+   - **Start with simplest viable approach** - complexity can be added later if needed
    - Explain trade-offs, security implications, and architectural considerations
    - Provide estimated scope of changes (files affected, complexity level)
    - Ask clarifying questions if requirements are unclear
+   - **Decision criteria**: If analysis exceeds 10 minutes or 3 back-and-forth exchanges, present best option and proceed with approval request
 
-3. **User Approval**: Wait for explicit approval before implementation
+3. **User Approval**: Wait for explicit approval before implementation (MAX 5 minutes)
    - Present the proposed plan clearly with all affected files listed
+   - **Default to simplest approach if no preference specified**
    - Get confirmation on the chosen approach
    - Confirm any architectural decisions or new dependencies
+   - **Auto-proceed rule**: If user doesn't respond within 5 minutes and approach is low-risk, proceed with simplest option
    - Only proceed after receiving clear "yes" or "approved" from user
 
 4. **Implementation**: Perform the approved changes
@@ -229,6 +234,7 @@ DECOMPOSITION ANALYSIS:
      - Add successful interaction patterns to `docs/copilot/INTERACTIONS.md`
      - Record effective prompts and templates in `docs/copilot/PROMPTS.md`
      - Document insights and lessons learned in `docs/copilot/LESSONS.md`
+     - Update decision patterns and frameworks in `docs/copilot/DECISION_FRAMEWORK.md`
      - Include session details in CHANGELOG.md Copilot sessions section
 
 8. **Git Commit**: Create a proper git commit
@@ -247,19 +253,40 @@ DECOMPOSITION ANALYSIS:
 - **ALWAYS update documentation** to reflect changes
 - **ALWAYS commit changes** with descriptive messages
 
-### Git Commit Message Format
+### Analysis Paralysis Prevention
 
-Use conventional commits format:
-```
-type(scope): description
+**MANDATORY: Apply these rules to prevent decision delays:**
 
-- Detailed explanation of changes
-- Files modified: list of files
-- Tests added: description of test coverage
-- Documentation updated: list of docs modified
-```
+#### Time-Boxing Rules
+- **Analysis Phase**: Maximum 10 minutes per request
+- **Option Generation**: Maximum 3 approaches per decision point  
+- **Approval Wait**: Maximum 5 minutes before defaulting to simplest approach
+- **Research**: Maximum 15 minutes before presenting findings and proceeding
 
-Types: `feat`, `fix`, `docs`, `test`, `refactor`, `style`, `chore`
+#### Decision Hierarchy (When Multiple Options Exist)
+1. **Simplest working solution** (preferred default)
+2. **Established pattern** from existing codebase
+3. **Industry standard** approach
+4. **Custom solution** (only if 1-3 are insufficient)
+
+#### Quick Decision Triggers
+- **Low-risk changes**: Proceed with best judgment if no user response in 5 minutes
+- **Standard patterns**: Use established codebase patterns without extensive analysis
+- **Maintenance tasks**: Default to existing code style and patterns
+- **Testing**: Follow existing test patterns and structures
+
+#### Complexity Escalation Rules
+- Start with minimal viable implementation
+- Add complexity only when simple solution proves insufficient
+- Document why complexity was necessary
+- Always provide rollback plan for complex changes
+
+#### Circuit Breaker Activation
+Automatically activate circuit breaker when:
+- Same problem attempted 3+ times without success
+- Analysis phase exceeds 15 minutes
+- User requests become increasingly complex without clear requirements
+- Implementation attempts result in repeated failures
 
 ## Architecture Requirements
 
@@ -545,6 +572,12 @@ class FlaskExtensionName:
    - Update troubleshooting patterns for new issues
    - Include performance tips for new AI interaction patterns
 
+10. **`docs/copilot/DECISION_FRAMEWORK.md`** - Decision-making guidelines
+    - Update decision trees and frameworks based on experience
+    - Add new time-boxing rules and quick decision patterns
+    - Document successful anti-paralysis strategies
+    - Include project-specific decision hierarchies and patterns
+
 #### Documentation Update Checklist
 **For EVERY development task, check these items:**
 
@@ -555,6 +588,7 @@ class FlaskExtensionName:
 - [ ] **DEPLOYMENT.md**: Are there infrastructure, configuration, or security changes?
 - [ ] **COPILOT.md**: Do AI collaboration workflows or best practices need updates?
 - [ ] **Copilot Knowledge Base**: Should successful patterns/prompts/lessons be captured?
+- [ ] **DECISION_FRAMEWORK.md**: Do decision patterns or anti-paralysis strategies need updates?
 
 #### Documentation Quality Standards
 - **Consistency**: Use same formatting and style across all docs
@@ -800,344 +834,3 @@ When generating Flask extension code:
 - Run linting and formatting tools
 - Test migrations before applying to production
 - Document API endpoints and complex logic
-
-## API Development (if applicable)
-
-### RESTful Design
-- Use proper HTTP methods (GET, POST, PUT, DELETE)
-- Return appropriate HTTP status codes
-- Use JSON for API responses
-- Include proper error responses
-- Implement authentication for protected endpoints
-
-Remember: Generate complete, working code that follows these patterns and requirements!
-
-## Testing Requirements (Enhanced)
-
-### Test Organization Structure
-- Organize tests in `tests/unit/`, `tests/integration/`, `tests/functional/` directories
-- Use `conftest.py` for shared fixtures and configuration
-- Group related tests in classes with descriptive names
-
-### Test Naming Convention
-- Use pattern: `test_[unit_being_tested]_[scenario]_[expected_result]`
-- Include comprehensive docstrings explaining what each test verifies
-- Examples: `test_user_registration_with_valid_data_creates_user`
-
-### Pytest Fixture Best Practices
-- Use appropriate fixture scopes: session (expensive setup), module (shared within file), function (default)
-- Create factory fixtures for parameterized test data
-- Include fixtures for: test app, test client, database session, sample users, auth headers
-
-### Testing Patterns to Follow
-
-#### Flask Application Testing
-- **Unit Tests**: Test individual models, forms, and utility functions in isolation
-- **Integration Tests**: Test complete user flows and route interactions  
-- **API Tests**: Test JSON endpoints with authentication and error scenarios
-- **Form Tests**: Validate form data and error handling
-
-#### Flask Extension Testing
-- **Extension Isolation Tests**: Test extension functionality without Flask context
-- **Extension Integration Tests**: Test extension with real Flask applications
-- **Multi-App Tests**: Test extension with multiple Flask application instances
-- **Configuration Tests**: Test extension with various configuration scenarios
-- **Lifecycle Tests**: Test extension initialization, teardown, and cleanup
-- **Compatibility Tests**: Test with different Flask versions (using tox)
-
-#### Flask Extension Test Fixtures
-```python
-# Example extension test fixtures
-@pytest.fixture
-def app():
-    """Create a Flask app for testing."""
-    app = Flask(__name__)
-    app.config['TESTING'] = True
-    return app
-
-@pytest.fixture
-def extension(app):
-    """Initialize extension with test app."""
-    ext = YourExtension()
-    ext.init_app(app)
-    return ext
-
-@pytest.fixture
-def multiple_apps():
-    """Test extension with multiple apps."""
-    app1 = Flask('app1')
-    app2 = Flask('app2')
-    ext = YourExtension()
-    ext.init_app(app1)
-    ext.init_app(app2)
-    return {'app1': app1, 'app2': app2, 'ext': ext}
-```
-
-### Database Testing Best Practices
-- Use separate test database configuration class with isolated database URL
-- Implement database fixture that creates fresh schema for each test session
-- Use transaction-based testing with automatic rollback after each test
-- Create database backup fixtures for tests that require production-like data
-- Implement database connection validation to ensure test database is being used
-- Use database seeding functions for consistent test data setup
-- Never run tests against production database under any circumstances
-
-### Test Data Management
-- Create factory functions for generating test data
-- Use database transactions that automatically rollback
-- Implement data cleanup procedures for integration tests
-- Use database snapshots for complex test scenarios
-- Create isolated test environments for each test worker
-- Implement test database reset mechanisms between test runs
-
-### Advanced Testing Techniques
-- Use parameterized tests for testing multiple input scenarios
-- Mock external dependencies using unittest.mock
-- Use test markers for categorization (slow, integration, etc.)
-- Skip tests conditionally based on environment
-- Maintain test coverage above 90%
-
-### Testing Configuration
-- Configure pytest with proper test discovery patterns
-- Set up coverage reporting with HTML and terminal output
-- Use strict markers and configuration
-- Include performance assertions for response times
-- Configure separate test database URL in pytest configuration
-- Use database fixtures that ensure complete isolation from production
-- Implement automatic test database cleanup and reset procedures
-
-## Documentation Requirements
-
-### Flask Application Documentation Standards
-- Document all API endpoints with request/response examples
-- Include authentication requirements for each endpoint
-- Document error responses and status codes
-- Use OpenAPI/Swagger specifications where applicable
-- Include rate limiting and usage guidelines
-- Document data validation rules and constraints
-
-### Flask Extension Documentation Standards
-- Provide comprehensive installation instructions
-- Document all configuration options with examples
-- Include usage examples for common scenarios
-- Document extension lifecycle (initialization, teardown)
-- Provide migration guides for version updates
-- Include troubleshooting section for common issues
-
-### Universal Documentation Standards
-- Add comprehensive docstrings to ALL functions, classes, and modules
-- Use Google-style docstrings with Args, Returns, Raises sections
-- Include usage examples in docstrings for complex functions
-- Document all function parameters and return types
-- Add inline comments for complex business logic
-- Document any assumptions or constraints in the code
-- Include TODO comments for future improvements with issue numbers
-
-### Code Documentation Standards
-- Use descriptive variable and function names that explain their purpose
-- Write self-documenting code with clear, descriptive names
-- Use explicit imports rather than wildcard imports
-- Break complex functions into smaller, single-purpose functions
-- Add type hints to all function parameters and return values
-- Include comprehensive docstrings with examples where helpful
-- Use consistent naming conventions throughout the codebase
-- Avoid deeply nested code structures (max 3-4 levels)
-- Add inline comments for non-obvious business logic
-- Structure code in logical, predictable patterns
-- Use constants for magic numbers and strings
-
-### Flask Extension Documentation Files
-
-#### Required Documentation for Extensions
-1. **README.md** - Clear installation and usage instructions
-2. **CHANGELOG.md** - Version history and breaking changes
-3. **LICENSE** - License file (typically MIT for Flask extensions)
-4. **setup.py** or **pyproject.toml** - Package configuration
-5. **requirements.txt** - Runtime dependencies
-6. **requirements-dev.txt** - Development dependencies
-7. **docs/** directory with detailed documentation
-
-#### Extension README Template
-```markdown
-# Flask-ExtensionName
-
-Brief description of what the extension does.
-
-## Installation
-
-```bash
-pip install Flask-ExtensionName
-```
-
-## Quick Start
-
-```python
-from flask import Flask
-from flask_extension_name import ExtensionName
-
-app = Flask(__name__)
-app.config['EXTENSION_CONFIG'] = 'value'
-
-ext = ExtensionName(app)
-# or
-ext = ExtensionName()
-ext.init_app(app)
-```
-
-## Configuration
-
-- `EXTENSION_CONFIG` - Description of configuration option
-
-## License
-
-MIT License
-```
-
-### Troubleshooting Support
-- Add detailed logging at appropriate levels (DEBUG, INFO, WARNING, ERROR)
-- Include error context in exception handling
-- Use descriptive error messages that explain what went wrong
-- Add assertions for critical assumptions
-- Include debug information in development mode
-- Create clear separation between different concerns
-
-### Future Expansion Design
-- Design functions and classes to be easily extensible
-- Use abstract base classes or protocols for common interfaces
-- Structure code to support new features without major refactoring
-- Include configuration options for future customization
-- Document extension points and customization guidelines
-- Use flexible data structures that can accommodate new fields
-
-## Flask Extension Distribution and Packaging
-
-### Extension Packaging Requirements
-```python
-# pyproject.toml for modern Flask extensions
-[build-system]
-requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
-build-backend = "setuptools.build_meta"
-
-[project]
-name = "Flask-ExtensionName"
-description = "Brief description"
-authors = [{name = "Your Name", email = "your.email@example.com"}]
-license = {text = "MIT"}
-requires-python = ">=3.7"
-dependencies = ["Flask>=1.0"]
-dynamic = ["version"]
-classifiers = [
-    "Framework :: Flask",
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-]
-
-[project.urls]
-Homepage = "https://github.com/yourusername/flask-extensionname"
-Repository = "https://github.com/yourusername/flask-extensionname"
-Documentation = "https://flask-extensionname.readthedocs.io"
-
-[tool.setuptools_scm]
-```
-
-### Distribution Workflow
-1. **Development Testing**: Test with `pip install -e .`
-2. **Version Tagging**: Use semantic versioning (v1.0.0)
-3. **Build Distribution**: `python -m build`
-4. **PyPI Upload**: `twine upload dist/*`
-5. **Documentation**: Deploy to Read the Docs
-
-### Extension Compatibility
-- Support multiple Flask versions (test with tox)
-- Support multiple Python versions (3.7+)
-- Document minimum requirements clearly
-- Test with different dependency versions
-- Provide migration guides for breaking changes
-
-## Template Requirements
-
-### HTML Template Structure
-- Use template inheritance with a base template
-- Include proper meta tags and viewport for responsive design
-- Use `url_for()` for all static file and route references
-- Include flash message handling in base template
-- Add CSRF tokens to all forms
-- Follow semantic HTML structure with proper accessibility
-
-## Development Workflow
-
-### Environment Setup
-
-#### Flask Application Environment
-- Use Pipenv for dependency management (`pipenv install`)
-- Pipenv automatically creates and manages virtual environments
-- Use `pipenv shell` to activate environment or `pipenv run` for commands
-- Environment variables in `.env` are automatically loaded by Pipenv
-- Never commit sensitive data or `.env` files
-- Commit both `Pipfile` and `Pipfile.lock` to version control
-- Use comprehensive `.gitignore` for Python projects
-
-#### Flask Extension Environment
-- Use pip with virtual environments or pipenv for development
-- Use `pip install -e .` for editable development installation
-- Test with multiple Python/Flask versions using tox
-- Use `requirements-dev.txt` for development dependencies
-- Include `tox.ini` for automated testing across versions
-- Use pre-commit hooks for code quality
-
-### Quality Assurance
-
-#### For Flask Applications
-- Write tests for all routes and business logic
-- Run code formatting and linting tools (black, flake8)
-- Test database migrations before applying to production
-- Document API endpoints and complex business logic
-- Maintain high test coverage (90%+)
-
-#### For Flask Extensions
-- Test with multiple Flask application configurations
-- Use tox to test across Python and Flask versions
-- Test extension lifecycle (init, teardown, cleanup)
-- Provide example applications in `examples/` directory
-- Document all configuration options and their effects
-- Test backward compatibility with previous versions
-- Update documentation when making any code changes
-- Review and update CHANGELOG.md for all significant changes
-
-### Documentation Maintenance
-- Update relevant documentation files when modifying code
-- Keep API documentation synchronized with code changes
-- Update deployment documentation for infrastructure changes
-- Maintain up-to-date dependency documentation
-- Review documentation for accuracy during code reviews
-- Use semantic versioning and document breaking changes
-
-### Change History Management
-- Maintain detailed CHANGELOG.md with version history
-- Document breaking changes, new features, and bug fixes
-- Include migration notes for database schema changes
-- Track dependency updates and their impacts
-- Document configuration changes and environment updates
-- Include rollback procedures for major changes
-
-### Common Development Commands
-
-#### Flask Application Commands (using Pipenv)
-- `pipenv install` - Install dependencies from Pipfile
-- `pipenv install <package>` - Add production dependency
-- `pipenv install <package> --dev` - Add development dependency
-- `pipenv shell` - Activate virtual environment
-- `pipenv run <command>` - Run command in virtual environment
-- `pipenv run flask run` - Run Flask development server
-- `pipenv run pytest` - Run tests
-
-#### Flask Extension Commands (using pip/tox)
-- `pip install -e .` - Install extension in development mode
-- `pip install -r requirements-dev.txt` - Install development dependencies
-- `python -m pytest` - Run tests
-- `tox` - Test across multiple Python/Flask versions
-- `python -m build` - Build distribution packages
-- `twine upload dist/*` - Upload to PyPI
-- `python setup.py sdist bdist_wheel` - Build packages (legacy)
-
-Remember: Generate complete, working code that follows these patterns and requirements!
