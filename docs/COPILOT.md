@@ -1,7 +1,7 @@
 # GitHub Copilot Collaboration Guide
 
 ## Overview
-This guide documents best practices for collaborating with GitHub Copilot on Flask development projects. It includes proven interaction patterns, effective prompts, and maintenance workflows.
+This guide documents best practices for collaborating with GitHub Copilot on Flask development projects. It covers both Flask applications and Flask extensions, including proven interaction patterns, effective prompts, and maintenance workflows.
 
 ## Quick Reference
 

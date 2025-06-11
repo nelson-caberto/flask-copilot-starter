@@ -127,6 +127,134 @@ May I proceed with creating these test files?
 - Identified edge cases to cover
 - Listed specific files to be created
 
+### Pattern 4: Flask Extension Development Request
+**Context**: Creating a new Flask extension for caching
+
+**User Request**:
+```
+I want to create a Flask extension for intelligent caching that can cache database queries and API responses
+```
+
+**Effective Copilot Response Pattern**:
+```
+I'll help you create a Flask extension for intelligent caching.
+
+## Analysis
+This extension needs:
+- Extension class with init_app() method
+- Configurable cache backends (Redis, Memcached, in-memory)
+- Decorators for caching functions and routes
+- Query result caching with automatic invalidation
+- API response caching with TTL management
+- Configuration options for cache keys and expiration
+
+## Extension Architecture:
+1. **Core Extension Class**: FlaskCache with init_app() pattern
+2. **Cache Backends**: Pluggable storage systems
+3. **Decorators**: @cache_result, @cache_route
+4. **Key Generation**: Intelligent cache key creation
+5. **Invalidation**: Manual and automatic cache clearing
+
+## Implementation Plan:
+### Files to create:
+- flask_intelligent_cache/__init__.py (extension class)
+- flask_intelligent_cache/backends.py (storage backends)
+- flask_intelligent_cache/decorators.py (caching decorators)
+- flask_intelligent_cache/utils.py (key generation, utilities)
+
+### Testing structure:
+- tests/test_extension.py (unit tests)
+- tests/test_integration.py (Flask app integration)
+- tests/test_backends.py (backend-specific tests)
+- tests/test_app.py (sample test application)
+
+### Packaging:
+- setup.py with Flask extension metadata
+- MANIFEST.in for package files
+- README.md with usage examples
+
+Do you want to proceed with this architecture?
+```
+
+**Key Success Factors**:
+- Recognized Flask extension patterns automatically
+- Proposed proper extension architecture with init_app()
+- Suggested comprehensive testing strategy
+- Included packaging considerations for PyPI
+- Followed Flask extension naming conventions
+
+### Pattern 5: Extension Integration Help
+**Context**: Integrating an existing extension into a Flask application
+
+**User Request**:
+```
+How do I properly integrate Flask-CustomAuth extension into my existing Flask app?
+```
+
+**Effective Copilot Response Pattern**:
+```
+I'll help you integrate Flask-CustomAuth into your Flask application properly.
+
+## Integration Steps:
+
+### 1. Installation
+```bash
+pip install Flask-CustomAuth
+# or
+pipenv install Flask-CustomAuth
+```
+
+### 2. Application Factory Pattern Integration
+```python
+from flask import Flask
+from flask_customauth import CustomAuth
+
+def create_app(config_name=None):
+    app = Flask(__name__)
+    app.config.from_object(config[config_name])
+    
+    # Initialize extension
+    custom_auth = CustomAuth()
+    custom_auth.init_app(app)
+    
+    return app
+```
+
+### 3. Configuration
+```python
+# In your config.py
+class Config:
+    CUSTOMAUTH_SECRET_KEY = 'your-secret-key'
+    CUSTOMAUTH_TOKEN_EXPIRY = 3600
+    # Add other extension-specific config
+```
+
+### 4. Usage in Routes
+```python
+from flask_customauth import login_required, current_user
+
+@app.route('/protected')
+@login_required
+def protected_route():
+    return f"Hello {current_user.username}"
+```
+
+## Best Practices:
+- Always use init_app() for application factory compatibility
+- Configure the extension through Flask's config system
+- Handle extension-specific errors gracefully
+- Test extension integration thoroughly
+
+Should I help you implement any specific part of this integration?
+```
+
+**Key Success Factors**:
+- Covered both direct and application factory integration patterns
+- Showed proper configuration handling
+- Included usage examples
+- Mentioned testing and error handling
+- Asked for specific follow-up needs
+
 ## Conversation Templates
 
 ### Template 1: Analysis Request

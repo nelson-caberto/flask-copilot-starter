@@ -1,5 +1,10 @@
 # Development Guide
 
+## Project Types
+This starter supports development of both Flask applications and Flask extensions:
+- **Flask Applications**: Complete web applications with routes, templates, and databases
+- **Flask Extensions**: Reusable packages that extend Flask functionality for other applications
+
 ## Prerequisites
 - Python 3.8 or higher
 - Pipenv for dependency management
@@ -48,7 +53,9 @@ pipenv run flask db upgrade
 
 ## Development Workflow
 
-### Running the Application
+### For Flask Applications
+
+#### Running the Application
 ```bash
 # Development server
 pipenv run flask run
@@ -57,7 +64,27 @@ pipenv run flask run
 pipenv run python run.py
 ```
 
-### Running Tests
+### For Flask Extensions
+
+#### Testing Extensions
+```bash
+# Test extension in isolation
+pipenv run pytest tests/test_extension.py
+
+# Test with sample Flask app
+pipenv run python tests/test_app.py
+
+# Test compatibility with different Flask versions
+tox
+```
+
+#### Extension Development
+- Create extension class with `init_app()` method
+- Follow Flask extension naming conventions
+- Implement proper teardown and configuration
+- Include comprehensive documentation and examples
+
+### Common Testing
 ```bash
 # Run all tests
 pipenv run pytest
@@ -138,10 +165,19 @@ pipenv run flask db upgrade
 ## Development Best Practices
 
 ### Code Organization
+
+#### For Flask Applications
 - Use application factory pattern
 - Organize routes in blueprints
 - Keep functions small and focused
 - Use type hints consistently
+
+#### For Flask Extensions
+- Create extension class with `init_app()` method
+- Support both application factory and direct app binding
+- Provide clear configuration options
+- Include comprehensive documentation and examples
+- Follow Flask extension naming conventions (`Flask-ExtensionName`)
 
 ### Documentation
 - Update docstrings when changing functions
@@ -175,6 +211,8 @@ git commit -m "Add new feature with tests and documentation"
 - `LOG_LEVEL` - Logging level (DEBUG, INFO, WARNING, ERROR)
 
 ## Directory Structure
+
+### Flask Application Structure
 ```
 flask-copilot-starter/
 ├── app/
@@ -193,6 +231,27 @@ flask-copilot-starter/
 ├── migrations/             # Database migrations
 ├── Pipfile                 # Dependencies
 └── run.py                  # Application entry point
+```
+
+### Flask Extension Structure
+```
+flask-extension-name/
+├── flask_extension_name/
+│   ├── __init__.py         # Extension class and init_app()
+│   ├── core.py             # Core extension functionality
+│   ├── utils.py            # Utility functions
+│   └── templates/          # Optional: Extension templates
+├── tests/
+│   ├── conftest.py         # Test configuration
+│   ├── test_extension.py   # Extension unit tests
+│   ├── test_integration.py # Integration tests
+│   └── test_app.py         # Sample test application
+├── docs/                   # Documentation
+├── examples/               # Usage examples
+├── setup.py                # Package configuration
+├── MANIFEST.in             # Package manifest
+├── tox.ini                 # Multi-environment testing
+└── README.md               # Extension documentation
 ```
 
 ---

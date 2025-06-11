@@ -500,4 +500,95 @@ Please help me correct the configuration.
 - Gather feedback from team members on prompt effectiveness
 - Update based on new Copilot capabilities or Flask best practices
 
-*Last updated: June 10, 2025 - Initial template creation*
+*Last updated: June 10, 2025 - Initial template creation**
+
+## Flask Extension Development Prompts
+
+### Extension Creation
+```
+I need to create a Flask extension for [extension purpose].
+
+Extension Requirements:
+- Functionality: [Core functionality description]
+- Configuration options: [What should be configurable]
+- Integration points: [How it integrates with Flask apps]
+- Dependencies: [Required packages]
+
+Please help me:
+1. Design the extension architecture
+2. Create the extension class with init_app() method
+3. Implement proper configuration handling
+4. Add comprehensive documentation and examples
+5. Set up proper testing structure
+
+Follow the Flask extension development patterns documented in the project guidelines.
+```
+
+**Example**:
+```
+I need to create a Flask extension for rate limiting API endpoints.
+
+Extension Requirements:
+- Functionality: Limit requests per minute/hour per IP or user
+- Configuration options: Rate limits, storage backend, exempt routes
+- Integration points: Decorator for routes, automatic Flask app integration
+- Dependencies: Redis for storage, Flask for core functionality
+
+Please help me create this extension following Flask extension best practices.
+```
+
+### Extension Testing
+```
+I need to create comprehensive tests for my Flask extension [extension_name].
+
+Testing Requirements:
+- Unit tests for extension class and methods
+- Integration tests with sample Flask applications
+- Multi-app testing scenarios
+- Configuration validation tests
+- Teardown and cleanup verification
+
+Please help me create a complete testing strategy that covers:
+1. Extension initialization and configuration
+2. Integration with different Flask app patterns
+3. Error handling and edge cases
+4. Performance and memory usage
+5. Compatibility with different Flask versions
+```
+
+### Extension Packaging
+```
+I need to prepare my Flask extension [extension_name] for PyPI distribution.
+
+Current Status:
+- Extension code is complete: [Yes/No]
+- Tests are passing: [Yes/No]
+- Documentation is written: [Yes/No]
+
+Please help me:
+1. Create proper setup.py with all required metadata
+2. Set up MANIFEST.in for package files
+3. Create distribution-ready documentation
+4. Validate package structure and dependencies
+5. Test installation and import in clean environment
+
+Follow Python packaging best practices for Flask extensions.
+```
+
+### Extension Debugging
+```
+I'm having issues with my Flask extension [extension_name].
+
+Problem Description:
+- Issue: [Specific problem]
+- Expected behavior: [What should happen]
+- Actual behavior: [What actually happens]
+- Error messages: [Any error messages]
+
+Extension Details:
+- Extension class: [Class name]
+- Integration method: [How it's added to Flask app]
+- Configuration: [Current configuration]
+
+Please help me debug this extension issue.
+```

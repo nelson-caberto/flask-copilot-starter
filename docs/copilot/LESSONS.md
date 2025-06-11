@@ -397,3 +397,178 @@ particularly focusing on [OWASP Top 10/specific threats]."
 
 *Last updated: June 10, 2025 - Initial documentation creation*
 *Next review: July 10, 2025*
+
+# Flask Extension Development Lessons
+
+## Overview
+This document captures insights, best practices, and lessons learned from developing Flask extensions.
+
+## Extension Architecture Patterns
+
+### Lesson: Always Implement init_app() Pattern
+**Context**: Creating Flask extensions that work with application factories
+
+**What We Learned**:
+- Extensions must support both direct app binding and application factory pattern
+- init_app() method should handle all app-specific configuration
+- Extension state should be stored in app.extensions dictionary
+- Avoid storing Flask app instance as extension attribute
+
+**Best Practice**:
+```python
+class MyExtension:
+    def __init__(self, app=None):
+        self.config = {}
+        if app is not None:
+            self.init_app(app)
+    
+    def init_app(self, app):
+        # Store extension in app.extensions
+        app.extensions['my_extension'] = self
+        
+        # Configure extension from Flask config
+        self.config.update(app.config.get('MY_EXTENSION_CONFIG', {}))
+        
+        # Register teardown handlers
+        app.teardown_appcontext(self._teardown)
+```
+
+### Lesson: Configuration Validation is Critical
+**Context**: Extensions failing due to invalid configuration
+
+**What We Learned**:
+- Validate configuration in init_app() method
+- Provide sensible defaults for all configuration options
+- Raise clear errors for missing required configuration
+- Document all configuration options thoroughly
+
+**Best Practice**:
+```python
+def init_app(self, app):
+    # Set defaults
+    app.config.setdefault('MY_EXT_TIMEOUT', 30)
+    app.config.setdefault('MY_EXT_RETRIES', 3)
+    
+    # Validate required config
+    if not app.config.get('MY_EXT_API_KEY'):
+        raise ValueError("MY_EXT_API_KEY is required")
+    
+    # Validate config types
+    if not isinstance(app.config['MY_EXT_TIMEOUT'], int):
+        raise TypeError("MY_EXT_TIMEOUT must be an integer")
+```
+
+## Extension Testing Strategies
+
+### Lesson: Test Extension Isolation
+**Context**: Extensions interfering with each other in tests
+
+**What We Learned**:
+- Each test should create a fresh Flask app instance
+- Extensions should clean up properly in teardown
+- Test extension with minimal Flask app configuration
+- Verify extension doesn't leak state between requests
+
+**Best Practice**:
+```python
+@pytest.fixture
+def app():
+    app = Flask(__name__)
+    app.config['TESTING'] = True
+    my_extension = MyExtension()
+    my_extension.init_app(app)
+    return app
+
+def test_extension_isolation(app):
+    # Test should not affect other tests
+    with app.app_context():
+        # Test extension functionality
+        pass
+```
+
+### Lesson: Multi-App Testing is Essential
+**Context**: Extensions working in single app but failing with multiple apps
+
+**What We Learned**:
+- Test extension with multiple Flask applications
+- Verify extension state doesn't leak between apps
+- Test concurrent usage patterns
+- Validate extension cleanup and resource management
+
+**Best Practice**:
+```python
+def test_multi_app_support():
+    app1 = Flask('app1')
+    app2 = Flask('app2')
+    
+    ext1 = MyExtension()
+    ext2 = MyExtension()
+    
+    ext1.init_app(app1)
+    ext2.init_app(app2)
+    
+    # Verify both apps work independently
+    with app1.app_context():
+        # Test app1 functionality
+        pass
+    
+    with app2.app_context():
+        # Test app2 functionality
+        pass
+```
+
+## Extension Distribution Lessons
+
+### Lesson: Package Structure Matters
+**Context**: Extensions failing to install or import correctly
+
+**What We Learned**:
+- Follow Flask extension naming conventions (Flask-ExtensionName)
+- Use proper package structure with __init__.py
+- Include all necessary files in MANIFEST.in
+- Test installation in clean virtual environment
+
+**Best Practice**:
+```
+flask-my-extension/
+├── flask_my_extension/
+│   ├── __init__.py        # Extension class here
+│   ├── core.py            # Core functionality
+│   └── utils.py           # Utilities
+├── tests/
+├── setup.py
+├── MANIFEST.in
+└── README.md
+```
+
+### Lesson: Documentation is Critical for Adoption
+**Context**: Well-coded extensions with poor documentation getting no usage
+
+**What We Learned**:
+- Include comprehensive README with examples
+- Document all configuration options
+- Provide working code examples
+- Include common use cases and patterns
+- Document compatibility requirements
+
+**Best Practice**:
+```markdown
+# Flask-MyExtension
+
+## Installation
+pip install Flask-MyExtension
+
+## Quick Start
+```python
+from flask import Flask
+from flask_my_extension import MyExtension
+
+app = Flask(__name__)
+ext = MyExtension()
+ext.init_app(app)
+```
+
+## Configuration Options
+- `MY_EXT_TIMEOUT`: Request timeout in seconds (default: 30)
+- `MY_EXT_API_KEY`: Required API key for service
+```
