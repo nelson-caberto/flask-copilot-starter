@@ -225,6 +225,11 @@ DECOMPOSITION ANALYSIS:
    - Update DEVELOPMENT.md for new development procedures
    - Add entries to CHANGELOG.md describing all changes
    - Update any affected configuration documentation
+   - **Save Copilot interactions to knowledge base**:
+     - Add successful interaction patterns to `docs/copilot/INTERACTIONS.md`
+     - Record effective prompts and templates in `docs/copilot/PROMPTS.md`
+     - Document insights and lessons learned in `docs/copilot/LESSONS.md`
+     - Include session details in CHANGELOG.md Copilot sessions section
 
 8. **Git Commit**: Create a proper git commit
    - Stage all modified files including tests and documentation

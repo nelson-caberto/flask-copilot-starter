@@ -46,6 +46,7 @@ This guide documents best practices for collaborating with GitHub Copilot on Fla
 1. **Test Generation**: Create comprehensive tests with Copilot
 2. **Documentation Review**: Ensure all docs are current
 3. **Knowledge Capture**: Document interaction patterns that worked well
+4. **Copilot Knowledge Base Updates**: Save successful interactions, prompts, and lessons to knowledge base files
 
 ## Maintenance Instructions
 
@@ -53,6 +54,7 @@ This guide documents best practices for collaborating with GitHub Copilot on Fla
 - [ ] Record successful interaction patterns in [INTERACTIONS.md](./copilot/INTERACTIONS.md)
 - [ ] Note effective prompts in [PROMPTS.md](./copilot/PROMPTS.md)
 - [ ] Update [CHANGELOG.md](./CHANGELOG.md) with Copilot-assisted changes
+- [ ] Document insights and lessons learned in [LESSONS.md](./copilot/LESSONS.md)
 
 ### Weekly Review
 - [ ] Review and organize interaction logs
@@ -83,6 +85,7 @@ This guide documents best practices for collaborating with GitHub Copilot on Fla
 - **Share insights**: Update team knowledge base regularly
 - **Iterate on prompts**: Refine prompts based on results
 - **Track evolution**: Monitor how collaboration improves over time
+- **Save interactions**: Add successful patterns to INTERACTIONS.md, effective prompts to PROMPTS.md, and insights to LESSONS.md
 
 ## Getting Started
 
@@ -91,6 +94,7 @@ This guide documents best practices for collaborating with GitHub Copilot on Fla
 3. **Use templates**: Start with [proven prompts](./copilot/PROMPTS.md)
 4. **Follow workflow**: Implement the mandatory development process
 5. **Document results**: Add your experiences to the knowledge base
+6. **Save interactions**: Record successful patterns in INTERACTIONS.md, effective prompts in PROMPTS.md, and lessons in LESSONS.md
 
 ## Troubleshooting
 
