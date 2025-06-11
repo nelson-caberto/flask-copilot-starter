@@ -22,6 +22,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Warning note in VS Code setup about Copilot instructions not auto-loading
 - Comprehensive prompt template for AI models to read project guidelines
 - Explanation of why explicit instruction loading is necessary for AI collaboration
+- **Flask Extension Development Support**: Comprehensive coverage for both Flask applications and extensions
+  - Added Flask extension architecture patterns and project structure
+  - Included extension class patterns with proper `init_app()` implementation
+  - Added extension-specific testing patterns and fixtures
+  - Included packaging and distribution guidelines for PyPI
+  - Added extension documentation requirements and templates
+  - Covered extension compatibility testing across Flask versions
+  - Included extension development workflow and tooling
 - **Cleanup and Verification Step**: Enhanced development workflow with dedicated cleanup step (step 6)
   - Added workspace cleanup procedures after testing
   - Implemented verification checks before documentation updates
@@ -103,6 +111,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Key Learnings**: Proactive safety measures prevent costly debugging loops
 **Challenges**: Balancing thoroughness with usability
 **Outcome**: Robust safety framework with automatic circuit breakers implemented
+
+#### Copilot Session: Flask Extension Development Support - June 10, 2025
+**Duration**: 45 minutes
+**Objective**: Add comprehensive Flask extension development support alongside existing Flask application patterns
+**Files Modified**:
+- `.vscode/copilot-instructions.md` - Added complete Flask extension development guidelines
+- `docs/CHANGELOG.md` - Documented Flask extension enhancement
+**Interaction Quality**: Excellent
+**Key Learnings**: Flask extensions require different patterns than applications - proper state management, `init_app()` patterns, packaging for PyPI, and testing across multiple Flask versions
+**Challenges**: Balancing comprehensive coverage while maintaining clarity between application vs extension patterns
+**Outcome**: Project now supports both Flask application and Flask extension development with appropriate patterns, testing, documentation, and distribution guidelines
 
 #### Copilot Session: AI Instructions Documentation - June 10, 2025
 **Duration**: 20 minutes

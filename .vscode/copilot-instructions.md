@@ -1,9 +1,19 @@
 # Flask Development Copilot Instructions
 
 ## Project Context
-You are working on a Flask web application. Generate code that follows Flask best practices, modern Python conventions, and secure development patterns.
+You are working on a Flask project that can be either:
+1. **Flask Web Application** - A complete web application using Flask
+2. **Flask Extension** - A reusable Flask extension for the Flask ecosystem
+
+Generate code that follows Flask best practices, modern Python conventions, secure development patterns, and appropriate patterns for the project type.
 
 **IMPORTANT: Always ask for explicit permission before creating, modifying, or deleting any files. Never perform any file operations without user consent.**
+
+### Project Type Detection
+**Always ask the user to clarify the project type if unclear:**
+- "Are we building a Flask web application or a Flask extension?"
+- "Should this follow Flask application patterns or Flask extension patterns?"
+- "Is this intended to be distributed as a reusable Flask extension?"
 
 ## AI Collaboration Safety System
 
@@ -248,32 +258,107 @@ Types: `feat`, `fix`, `docs`, `test`, `refactor`, `style`, `chore`
 
 ## Architecture Requirements
 
-### Application Structure
+### Flask Application Structure
+**For Flask Web Applications:**
 - Use Flask Application Factory Pattern with `create_app()` function
 - Organize routes using Blueprints for modularity
 - Use class-based configuration for different environments
 - Separate concerns: models, routes, forms, templates, static files
 
+### Flask Extension Structure
+**For Flask Extensions:**
+- Create extension class that follows Flask extension patterns
+- Use `init_app()` method for application initialization
+- Support deferred initialization and multiple application instances
+- Follow Flask extension naming conventions (Flask-ExtensionName)
+- Implement proper state management and context handling
+
 ### Project Structure
-Follow this structure:
-- `app/` - Main application package
-- `app/__init__.py` - Application factory
-- `app/config.py` - Configuration classes
-- `app/models/` - Database models
-- `app/routes/` - Blueprint modules
-- `app/templates/` - Jinja2 templates
-- `app/static/` - CSS, JS, images
-- `tests/` - Test modules with unit/integration/functional separation
-- `docs/` - Documentation directory
-- `docs/README.md` - Main project documentation
-- `docs/API.md` - API documentation
-- `docs/CHANGELOG.md` - Change history and version notes
-- `docs/DEPLOYMENT.md` - Deployment instructions
-- `docs/DEVELOPMENT.md` - Development setup and guidelines
-- `Pipfile` - Dependencies and Python version
-- `Pipfile.lock` - Locked dependency versions (commit this)
-- `.env` - Environment variables (never commit)
-- `run.py` - Application entry point
+
+#### Flask Application Structure
+```
+flask-app/
+├── app/                    # Main application package
+│   ├── __init__.py        # Application factory
+│   ├── config.py          # Configuration classes
+│   ├── models/            # Database models
+│   ├── routes/            # Blueprint modules
+│   ├── templates/         # Jinja2 templates
+│   └── static/            # CSS, JS, images
+├── tests/                 # Test modules
+├── docs/                  # Documentation
+├── migrations/            # Database migrations (if using Flask-Migrate)
+├── Pipfile               # Dependencies
+├── Pipfile.lock          # Locked versions
+├── run.py                # Application entry point
+└── .env                  # Environment variables (never commit)
+```
+
+#### Flask Extension Structure
+```
+flask-extension/
+├── flask_extension_name/   # Main extension package
+│   ├── __init__.py        # Extension class and public API
+│   ├── core.py           # Core extension logic
+│   ├── utils.py          # Utility functions
+│   ├── exceptions.py     # Custom exceptions
+│   └── templates/        # Extension templates (if needed)
+├── tests/                # Test modules
+├── docs/                 # Documentation
+├── examples/             # Usage examples
+├── setup.py              # Package setup (for distribution)
+├── setup.cfg             # Setup configuration
+├── pyproject.toml        # Modern Python packaging
+├── MANIFEST.in           # Package manifest
+├── requirements.txt      # Runtime dependencies
+├── requirements-dev.txt  # Development dependencies
+└── tox.ini              # Testing configuration
+```
+
+### Flask Extension Development Patterns
+
+#### Extension Class Pattern
+```python
+from flask import Flask, current_app
+
+class FlaskExtensionName:
+    def __init__(self, app=None):
+        self.app = app
+        if app is not None:
+            self.init_app(app)
+    
+    def init_app(self, app: Flask):
+        """Initialize extension with Flask application."""
+        app.config.setdefault('EXTENSION_CONFIG_KEY', 'default_value')
+        
+        # Store extension instance on app
+        app.extensions['extension_name'] = self
+        
+        # Register blueprints, error handlers, etc.
+        if hasattr(app, 'teardown_appcontext'):
+            app.teardown_appcontext(self.teardown)
+```
+
+#### Extension State Management
+- Store configuration in `app.config` with prefixed keys
+- Use `app.extensions` dict to store extension instances
+- Handle application context properly with `current_app`
+- Support multiple application instances
+- Implement proper cleanup in teardown handlers
+
+#### Extension API Design
+- Provide clear public API in `__init__.py`
+- Use descriptive class and function names
+- Follow Flask's naming conventions
+- Provide configuration options with sensible defaults
+- Include comprehensive docstrings for all public methods
+
+#### Extension Testing Patterns
+- Test extension in isolation from specific applications
+- Test with multiple Flask application configurations
+- Mock external dependencies appropriately
+- Test extension lifecycle (init, teardown, etc.)
+- Include integration tests with real Flask applications
 
 ## Coding Standards
 
@@ -285,13 +370,33 @@ Follow this structure:
 - Add Google-style docstrings to functions and classes
 - Use snake_case for variables/functions, PascalCase for classes
 
-### Flask Patterns
-- Always use Application Factory Pattern
+### Flask Application Patterns
+**For Flask Applications:**
+- Always use Application Factory Pattern with `create_app()`
 - Register blueprints in the factory function
 - Use proper error handlers for 404, 500, etc.
 - Implement CSRF protection on all forms
 - Use environment variables for configuration
 - Include proper logging configuration
+
+### Flask Extension Patterns
+**For Flask Extensions:**
+- Follow Flask extension initialization pattern with `init_app()`
+- Support both direct initialization and deferred initialization
+- Use `app.extensions` dict to store extension instances
+- Prefix all configuration keys with extension name
+- Handle application context correctly with `current_app`
+- Implement proper cleanup in teardown handlers
+- Follow Flask extension naming conventions (Flask-ExtensionName)
+- Provide clear separation between public and private APIs
+
+### Universal Flask Patterns
+**For Both Applications and Extensions:**
+- Use proper error handling and HTTP status codes
+- Implement comprehensive logging
+- Follow security best practices
+- Use type hints and docstrings
+- Implement proper testing patterns
 
 ### AI-Friendly Code Standards
 - Write self-documenting code with clear, descriptive names
@@ -339,9 +444,9 @@ Follow this structure:
 
 ### Documentation Files Update Protocol
 
-**MANDATORY: When making any changes, update ALL relevant documentation files in `docs/` folder:**
+**MANDATORY: When making any changes, update ALL relevant documentation files:**
 
-#### Core Documentation Files (Always Review)
+#### Flask Application Documentation Files (Always Review)
 1. **`docs/README.md`** - Main project documentation
    - Update getting started instructions if setup changes
    - Modify feature descriptions for new capabilities
@@ -374,6 +479,38 @@ Follow this structure:
 5. **`docs/DEPLOYMENT.md`** - Production deployment
    - Update deployment steps for infrastructure changes
    - Modify configuration examples for new settings
+
+#### Flask Extension Documentation Files (Always Review)
+1. **`README.md`** - Main extension documentation (root level)
+   - Update installation instructions for new requirements
+   - Modify quick start examples for API changes
+   - Update configuration options documentation
+   - Add new usage examples for new features
+   - Update compatibility information
+
+2. **`CHANGELOG.md`** - Version history and changes
+   - Document all API changes and new features
+   - Include breaking changes with migration instructions
+   - Note Flask version compatibility changes
+   - Track dependency requirement updates
+
+3. **`docs/`** directory - Detailed documentation
+   - Update API reference for new methods/classes
+   - Add examples for new functionality
+   - Update configuration reference
+   - Modify integration guides for changes
+
+4. **`setup.py`** or **`pyproject.toml`** - Package metadata
+   - Update version numbers for releases
+   - Modify dependency requirements if needed
+   - Update classifiers for new Python/Flask versions
+   - Update description and keywords if scope changes
+
+5. **`examples/`** directory - Usage examples
+   - Add examples for new features
+   - Update existing examples for API changes
+   - Test all examples with current Flask versions
+   - Include configuration examples for new options
    - Update backup procedures for new data types
    - Add performance optimization notes for new features
    - Update security considerations for new endpoints
@@ -517,7 +654,9 @@ Follow this structure:
 
 ## Dependencies
 
-### Core Stack
+### Flask Application Dependencies
+
+#### Core Application Stack
 - Flask - Web framework
 - Flask-WTF - Forms and CSRF protection
 - python-dotenv - Environment variables (auto-loaded by Pipenv)
@@ -525,33 +664,112 @@ Follow this structure:
 - Flask-Migrate - Database migrations
 - gunicorn - Production WSGI server
 
-### Development Tools
+#### Application Development Tools
 - pytest - Testing framework
 - coverage - Test coverage
 - black - Code formatting
 - flake8 - Linting
 
-### Pipenv Dependency Management
+### Flask Extension Dependencies
+
+#### Core Extension Stack
+- Flask - Core framework (minimum supported version)
+- setuptools - For packaging and distribution
+- wheel - For building wheel distributions
+
+#### Extension Development Tools
+- pytest - Testing framework
+- tox - Testing across Python versions
+- coverage - Test coverage reporting
+- black - Code formatting
+- flake8 - Linting
+- sphinx - Documentation generation
+- twine - PyPI publishing
+
+#### Extension Packaging Files
+```python
+# setup.py example for Flask extension
+from setuptools import setup, find_packages
+
+setup(
+    name='Flask-ExtensionName',
+    version='1.0.0',
+    packages=find_packages(),
+    install_requires=['Flask>=1.0'],
+    python_requires='>=3.6',
+    author='Your Name',
+    author_email='your.email@example.com',
+    description='A Flask extension for...',
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
+    url='https://github.com/yourusername/flask-extensionname',
+    classifiers=[
+        'Framework :: Flask',
+        'Programming Language :: Python :: 3',
+        'License :: OSI Approved :: MIT License',
+    ],
+)
+```
+
+### Dependency Management
+
+#### For Flask Applications (using Pipenv)
 - Use `pipenv install <package>` for production dependencies
 - Use `pipenv install <package> --dev` for development dependencies
 - Pipenv automatically creates and manages virtual environments
 - Use `pipenv shell` to activate the virtual environment
 - Use `pipenv run <command>` to run commands in the virtual environment
 
+#### For Flask Extensions (using setuptools)
+- Define runtime dependencies in `install_requires`
+- Define development dependencies in `requirements-dev.txt` or `extras_require`
+- Use `pip install -e .` for development installation
+- Use `tox` for testing across multiple Python/Flask versions
+- Specify minimum Flask version compatibility
+
 ## Code Generation Guidelines
 
-When generating Flask code:
+**IMPORTANT: Always ask for explicit permission before creating, modifying, or deleting any files. This includes creating new files, editing existing files, or removing files. Never perform any file operations without user consent.**
 
-1. Include proper error handling and HTTP status codes
-2. Use environment variables for configuration
-3. Add form validation for user inputs
-4. Include logging statements for debugging
-5. Follow RESTful routing conventions
-6. Use template inheritance with base templates
-7. Add CSRF tokens to all forms
-8. Use flash messages for user feedback
-9. Implement proper redirects after form submissions
-10. Include comprehensive docstrings
+### Flask Application Code Generation
+
+When generating Flask application code:
+
+1. **Always include error handling** and proper HTTP status codes
+2. **Use environment variables** for configuration values
+3. **Include form validation** for user inputs
+4. **Add logging statements** for debugging
+5. **Follow RESTful routing conventions** when appropriate
+6. **Use template inheritance** with base templates
+7. **Add CSRF tokens** to all forms
+8. **Use flash messages** for user feedback
+9. **Implement proper redirects** after form submissions
+10. **Include comprehensive docstrings** and helpful comments
+
+### Flask Extension Code Generation
+
+When generating Flask extension code:
+
+1. **Follow Flask extension patterns** with proper `init_app()` method
+2. **Support deferred initialization** and multiple app instances
+3. **Use proper state management** with `app.extensions`
+4. **Prefix configuration keys** with extension name
+5. **Handle application context** correctly with `current_app`
+6. **Implement proper cleanup** in teardown handlers
+7. **Provide clear public API** with descriptive method names
+8. **Include comprehensive documentation** for all public methods
+9. **Follow Flask naming conventions** (Flask-ExtensionName)
+10. **Support configuration options** with sensible defaults
+
+### Universal Code Generation Rules
+
+**For both applications and extensions:**
+- **Update documentation** when adding new features or endpoints
+- **Add changelog entries** for significant changes
+- **Include comprehensive type hints** and docstrings
+- **Implement proper error handling** and logging
+- **Follow security best practices**
+- **Write comprehensive tests** for all functionality
 
 ## Template Requirements
 
@@ -607,10 +825,48 @@ Remember: Generate complete, working code that follows these patterns and requir
 - Include fixtures for: test app, test client, database session, sample users, auth headers
 
 ### Testing Patterns to Follow
+
+#### Flask Application Testing
 - **Unit Tests**: Test individual models, forms, and utility functions in isolation
-- **Integration Tests**: Test complete user flows and route interactions
+- **Integration Tests**: Test complete user flows and route interactions  
 - **API Tests**: Test JSON endpoints with authentication and error scenarios
 - **Form Tests**: Validate form data and error handling
+
+#### Flask Extension Testing
+- **Extension Isolation Tests**: Test extension functionality without Flask context
+- **Extension Integration Tests**: Test extension with real Flask applications
+- **Multi-App Tests**: Test extension with multiple Flask application instances
+- **Configuration Tests**: Test extension with various configuration scenarios
+- **Lifecycle Tests**: Test extension initialization, teardown, and cleanup
+- **Compatibility Tests**: Test with different Flask versions (using tox)
+
+#### Flask Extension Test Fixtures
+```python
+# Example extension test fixtures
+@pytest.fixture
+def app():
+    """Create a Flask app for testing."""
+    app = Flask(__name__)
+    app.config['TESTING'] = True
+    return app
+
+@pytest.fixture
+def extension(app):
+    """Initialize extension with test app."""
+    ext = YourExtension()
+    ext.init_app(app)
+    return ext
+
+@pytest.fixture
+def multiple_apps():
+    """Test extension with multiple apps."""
+    app1 = Flask('app1')
+    app2 = Flask('app2')
+    ext = YourExtension()
+    ext.init_app(app1)
+    ext.init_app(app2)
+    return {'app1': app1, 'app2': app2, 'ext': ext}
+```
 
 ### Database Testing Best Practices
 - Use separate test database configuration class with isolated database URL
@@ -645,65 +901,92 @@ Remember: Generate complete, working code that follows these patterns and requir
 - Use database fixtures that ensure complete isolation from production
 - Implement automatic test database cleanup and reset procedures
 
-## Code Generation Guidelines
+## Documentation Requirements
 
-**IMPORTANT: Always ask for explicit permission before creating, modifying, or deleting any files. This includes creating new files, editing existing files, or removing files. Never perform any file operations without user consent.**
+### Flask Application Documentation Standards
+- Document all API endpoints with request/response examples
+- Include authentication requirements for each endpoint
+- Document error responses and status codes
+- Use OpenAPI/Swagger specifications where applicable
+- Include rate limiting and usage guidelines
+- Document data validation rules and constraints
 
-When generating Flask code:
+### Flask Extension Documentation Standards
+- Provide comprehensive installation instructions
+- Document all configuration options with examples
+- Include usage examples for common scenarios
+- Document extension lifecycle (initialization, teardown)
+- Provide migration guides for version updates
+- Include troubleshooting section for common issues
 
-1. **Always include error handling** and proper HTTP status codes
-2. **Use environment variables** for configuration values
-3. **Include form validation** for user inputs
-4. **Add logging statements** for debugging
-5. **Follow RESTful routing conventions** when appropriate
-6. **Include template inheritance** with base templates
-7. **Add CSRF tokens** to all forms
-8. **Use flash messages** for user feedback
-9. **Implement proper redirects** after form submissions
-10. **Include comprehensive docstrings** and helpful comments
-11. **Update documentation** when adding new features or endpoints
-12. **Add changelog entries** for significant changes
+### Universal Documentation Standards
+- Add comprehensive docstrings to ALL functions, classes, and modules
+- Use Google-style docstrings with Args, Returns, Raises sections
+- Include usage examples in docstrings for complex functions
+- Document all function parameters and return types
+- Add inline comments for complex business logic
+- Document any assumptions or constraints in the code
+- Include TODO comments for future improvements with issue numbers
 
-## Documentation Generation Requirements
-
-### When Creating New Code
-- Add complete docstrings to all new functions and classes
-- Update API documentation for new endpoints
-- Add examples to complex functions
-- Document any new configuration options
-- Include security considerations in documentation
-
-### When Modifying Existing Code
-- Update existing docstrings to reflect changes
-- Modify API documentation for endpoint changes
-- Update configuration documentation for new options
-- Add changelog entry describing the modification
-- Update deployment documentation if infrastructure changes
-
-### Documentation Format Standards
-- Use Markdown format for all documentation files
-- Include code examples with proper syntax highlighting
-- Use consistent heading structure and formatting
-- Include table of contents for longer documents
-- Use proper cross-references between documentation files
-
-## AI-Friendly Code Generation
-
-### Readability Requirements
+### Code Documentation Standards
 - Use descriptive variable and function names that explain their purpose
-- Write functions that do one thing well (single responsibility principle)
-- Keep functions under 20-30 lines when possible
-- Use clear, logical code organization and structure
-- Add whitespace and formatting for visual clarity
-- Use meaningful constants instead of magic numbers
+- Write self-documenting code with clear, descriptive names
+- Use explicit imports rather than wildcard imports
+- Break complex functions into smaller, single-purpose functions
+- Add type hints to all function parameters and return values
+- Include comprehensive docstrings with examples where helpful
+- Use consistent naming conventions throughout the codebase
+- Avoid deeply nested code structures (max 3-4 levels)
+- Add inline comments for non-obvious business logic
+- Structure code in logical, predictable patterns
+- Use constants for magic numbers and strings
 
-### Maintainability Focus
-- Include comprehensive type hints for all functions
-- Write modular code that can be easily modified or extended
-- Use dependency injection patterns where appropriate
-- Separate configuration from implementation
-- Create reusable utility functions for common operations
-- Follow consistent patterns throughout the codebase
+### Flask Extension Documentation Files
+
+#### Required Documentation for Extensions
+1. **README.md** - Clear installation and usage instructions
+2. **CHANGELOG.md** - Version history and breaking changes
+3. **LICENSE** - License file (typically MIT for Flask extensions)
+4. **setup.py** or **pyproject.toml** - Package configuration
+5. **requirements.txt** - Runtime dependencies
+6. **requirements-dev.txt** - Development dependencies
+7. **docs/** directory with detailed documentation
+
+#### Extension README Template
+```markdown
+# Flask-ExtensionName
+
+Brief description of what the extension does.
+
+## Installation
+
+```bash
+pip install Flask-ExtensionName
+```
+
+## Quick Start
+
+```python
+from flask import Flask
+from flask_extension_name import ExtensionName
+
+app = Flask(__name__)
+app.config['EXTENSION_CONFIG'] = 'value'
+
+ext = ExtensionName(app)
+# or
+ext = ExtensionName()
+ext.init_app(app)
+```
+
+## Configuration
+
+- `EXTENSION_CONFIG` - Description of configuration option
+
+## License
+
+MIT License
+```
 
 ### Troubleshooting Support
 - Add detailed logging at appropriate levels (DEBUG, INFO, WARNING, ERROR)
@@ -721,6 +1004,51 @@ When generating Flask code:
 - Document extension points and customization guidelines
 - Use flexible data structures that can accommodate new fields
 
+## Flask Extension Distribution and Packaging
+
+### Extension Packaging Requirements
+```python
+# pyproject.toml for modern Flask extensions
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Flask-ExtensionName"
+description = "Brief description"
+authors = [{name = "Your Name", email = "your.email@example.com"}]
+license = {text = "MIT"}
+requires-python = ">=3.7"
+dependencies = ["Flask>=1.0"]
+dynamic = ["version"]
+classifiers = [
+    "Framework :: Flask",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/flask-extensionname"
+Repository = "https://github.com/yourusername/flask-extensionname"
+Documentation = "https://flask-extensionname.readthedocs.io"
+
+[tool.setuptools_scm]
+```
+
+### Distribution Workflow
+1. **Development Testing**: Test with `pip install -e .`
+2. **Version Tagging**: Use semantic versioning (v1.0.0)
+3. **Build Distribution**: `python -m build`
+4. **PyPI Upload**: `twine upload dist/*`
+5. **Documentation**: Deploy to Read the Docs
+
+### Extension Compatibility
+- Support multiple Flask versions (test with tox)
+- Support multiple Python versions (3.7+)
+- Document minimum requirements clearly
+- Test with different dependency versions
+- Provide migration guides for breaking changes
+
 ## Template Requirements
 
 ### HTML Template Structure
@@ -734,6 +1062,8 @@ When generating Flask code:
 ## Development Workflow
 
 ### Environment Setup
+
+#### Flask Application Environment
 - Use Pipenv for dependency management (`pipenv install`)
 - Pipenv automatically creates and manages virtual environments
 - Use `pipenv shell` to activate environment or `pipenv run` for commands
@@ -742,12 +1072,30 @@ When generating Flask code:
 - Commit both `Pipfile` and `Pipfile.lock` to version control
 - Use comprehensive `.gitignore` for Python projects
 
+#### Flask Extension Environment
+- Use pip with virtual environments or pipenv for development
+- Use `pip install -e .` for editable development installation
+- Test with multiple Python/Flask versions using tox
+- Use `requirements-dev.txt` for development dependencies
+- Include `tox.ini` for automated testing across versions
+- Use pre-commit hooks for code quality
+
 ### Quality Assurance
+
+#### For Flask Applications
 - Write tests for all routes and business logic
 - Run code formatting and linting tools (black, flake8)
 - Test database migrations before applying to production
 - Document API endpoints and complex business logic
 - Maintain high test coverage (90%+)
+
+#### For Flask Extensions
+- Test with multiple Flask application configurations
+- Use tox to test across Python and Flask versions
+- Test extension lifecycle (init, teardown, cleanup)
+- Provide example applications in `examples/` directory
+- Document all configuration options and their effects
+- Test backward compatibility with previous versions
 - Update documentation when making any code changes
 - Review and update CHANGELOG.md for all significant changes
 
@@ -767,7 +1115,9 @@ When generating Flask code:
 - Document configuration changes and environment updates
 - Include rollback procedures for major changes
 
-### Common Pipenv Commands
+### Common Development Commands
+
+#### Flask Application Commands (using Pipenv)
 - `pipenv install` - Install dependencies from Pipfile
 - `pipenv install <package>` - Add production dependency
 - `pipenv install <package> --dev` - Add development dependency
@@ -775,5 +1125,14 @@ When generating Flask code:
 - `pipenv run <command>` - Run command in virtual environment
 - `pipenv run flask run` - Run Flask development server
 - `pipenv run pytest` - Run tests
+
+#### Flask Extension Commands (using pip/tox)
+- `pip install -e .` - Install extension in development mode
+- `pip install -r requirements-dev.txt` - Install development dependencies
+- `python -m pytest` - Run tests
+- `tox` - Test across multiple Python/Flask versions
+- `python -m build` - Build distribution packages
+- `twine upload dist/*` - Upload to PyPI
+- `python setup.py sdist bdist_wheel` - Build packages (legacy)
 
 Remember: Generate complete, working code that follows these patterns and requirements!
