@@ -19,6 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced troubleshooting section with common setup issues
 - Pipenv environment setup instructions using Copilot
 - Development environment verification prompts and troubleshooting guides
+- Warning note in VS Code setup about Copilot instructions not auto-loading
+- Comprehensive prompt template for AI models to read project guidelines
+- Explanation of why explicit instruction loading is necessary for AI collaboration
 - **Cleanup and Verification Step**: Enhanced development workflow with dedicated cleanup step (step 6)
   - Added workspace cleanup procedures after testing
   - Implemented verification checks before documentation updates
@@ -101,6 +104,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Challenges**: Balancing thoroughness with usability
 **Outcome**: Robust safety framework with automatic circuit breakers implemented
 
+#### Copilot Session: AI Instructions Documentation - June 10, 2025
+**Duration**: 20 minutes
+**Objective**: Add warning about Copilot instructions not auto-loading and provide prompt template
+**Files Modified**:
+- `docs/README.md` - Added warning note and prompt template for AI model instruction loading
+- `docs/CHANGELOG.md` - Documented AI instruction loading enhancement
+**Interaction Quality**: Excellent
+**Key Learnings**: AI models need explicit instruction to read project guidelines; auto-loading assumptions are incorrect
+**Challenges**: Creating clear, actionable prompt template that ensures AI commitment to following protocols
+**Outcome**: Users now have effective prompt template to ensure AI models read and commit to project guidelines
+
 #### Copilot Session: Workflow Enhancement - June 10, 2025
 **Duration**: 15 minutes
 **Objective**: Add cleanup and verification step to development workflow
@@ -111,6 +125,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Key Learnings**: Cleanup steps are essential for maintaining workspace hygiene
 **Challenges**: Proper step sequencing and numbering
 **Outcome**: Complete 8-step development workflow with proper cleanup procedures
+
+#### Copilot Session: AI Instructions Documentation - June 10, 2025
+**Duration**: 20 minutes
+**Objective**: Add warning about Copilot instructions not auto-loading and provide prompt template
+**Files Modified**: 
+- `docs/README.md` - Added warning note and comprehensive prompt template in VS Code setup section
+- `docs/CHANGELOG.md` - Documented documentation enhancement
+**Interaction Quality**: Excellent
+**Key Learnings**: AI models require explicit instruction to read project files; clear prompt templates improve collaboration effectiveness
+**Challenges**: Creating comprehensive yet accessible prompt template that covers all critical project aspects
+**Outcome**: Users now have clear guidance on how to ensure AI models understand project context and requirements
 
 ### Deprecated
 - N/A

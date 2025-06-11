@@ -60,6 +60,36 @@ code .
 2. **VS Code will automatically use these instructions** for this project
 3. **Test the setup** by asking Copilot: "What are the coding standards for this Flask project?"
 
+#### ⚠️ Important Note: Copilot Instructions Loading
+**AI models (including Copilot) do NOT automatically read or load the `.vscode/copilot-instructions.md` file.** You must explicitly instruct them to read and understand the project's guidelines.
+
+**Use this prompt template to ensure AI models read the project guidelines:**
+
+```
+Before we start working together, please read the following files to understand this project's development guidelines:
+
+1. Read `.vscode/copilot-instructions.md` - This contains the complete development guidelines, safety protocols, and mandatory 8-step workflow for this Flask project.
+
+2. Read all files in the `docs/` directory to understand the project structure, documentation standards, and what needs to be documented when making changes.
+
+After reading these files, please confirm you understand and commit to following:
+- The mandatory 8-step development workflow (never skip any steps)
+- The safety protocols and circuit breakers 
+- That you must ask permission before creating/modifying files
+- The Flask coding standards and patterns to follow
+- All testing and documentation requirements
+
+Please explicitly state: "I have read the project guidelines and commit to following all instructions, workflows, and safety protocols outlined in the files."
+
+Once you've made this commitment, we can begin development work.
+```
+
+**Why This Is Necessary:**
+- AI models cannot automatically access project files unless explicitly instructed
+- The Copilot instructions contain critical safety protocols and workflows
+- Following the documented patterns ensures consistent, high-quality results
+- The 8-step workflow prevents common development issues and maintains code quality
+
 #### Enable Copilot Features
 - **Inline suggestions**: Type code and press `Tab` to accept suggestions
 - **Chat interface**: Use `@workspace` to ask about project-specific questions
