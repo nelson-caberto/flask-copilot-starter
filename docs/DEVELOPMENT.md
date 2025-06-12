@@ -17,6 +17,9 @@ pipenv shell
 
 ## ⚡ Testing Guidelines (Speed-First)
 
+### 🧪 **CRITICAL**: Check `docs/copilot/TEST_CHEATSHEET.md` before generating ANY tests
+**Prevents AI "guessing" - ensures tests use actual codebase structure**
+
 ### ⚡ Speed-First Test Execution Patterns
 **MANDATORY: Use grep to filter pytest output for efficiency**
 

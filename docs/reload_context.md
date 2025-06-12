@@ -134,6 +134,7 @@ git add . && git commit -m "feat: [description]"
 2. **`docs/copilot/INTERACTIONS.md`** - Successful patterns
 3. **`docs/copilot/LESSONS.md`** - Insights and learnings
 4. **`docs/copilot/PROMPTS.md`** - Effective prompts used
+5. **`docs/copilot/TEST_CHEATSHEET.md`** - 🧪 Actual codebase structure (prevents AI guessing)
 
 ---
 

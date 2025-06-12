@@ -27,6 +27,7 @@
 - **Unit tests** → Copy existing test file structure
 - **Integration tests** → Use current testing patterns
 - **Fixtures** → Match existing fixture patterns
+- **Test generation** → 🧪 **CRITICAL**: Check `docs/copilot/TEST_CHEATSHEET.md` to verify actual code structure before generating ANY tests
 
 ### 🚀 Quick Decisions (< 5 minutes) - MINIMAL ANALYSIS
 **Simple choice required - pick the obvious option:**
@@ -86,6 +87,12 @@ What to Test?
 ├── New route? → Integration test (IMMEDIATE)
 ├── New feature? → Both unit + integration (IMMEDIATE)
 └── Bug fix? → Reproduce + fix test (IMMEDIATE)
+
+🧪 CRITICAL: Before generating ANY test, check docs/copilot/TEST_CHEATSHEET.md
+- Verify actual model fields and types
+- Check actual route paths and methods  
+- Confirm actual form fields and validators
+- Use real import paths from codebase
 ```
 
 ## 🚫 Anti-Patterns to Eliminate

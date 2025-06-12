@@ -177,6 +177,8 @@ See [DEVELOPMENT.md](./DEVELOPMENT.md) for detailed setup instructions.
 - [Interaction Examples](./copilot/INTERACTIONS.md) - Successful collaboration patterns
 - [Prompt Templates](./copilot/PROMPTS.md) - Effective prompts for common tasks
 - [Lessons Learned](./copilot/LESSONS.md) - Best practices and insights
+- [Decision Framework](./copilot/DECISION_FRAMEWORK.md) - Quick decision guidelines
+- [Test Cheatsheet](./copilot/TEST_CHEATSHEET.md) - **🧪 Anti-guessing test generation** - Prevents AI from "forgetting" actual code structure
 
 ## ⚡ **Key Features**
 

@@ -65,6 +65,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **AI Testing Cheatsheet** (`docs/copilot/TEST_CHEATSHEET.md`) 🧪
+  - **CRITICAL SOLUTION**: Prevents AI "guessing" actual codebase structure when generating tests
+  - **Anti-Guessing Protocol**: Mandatory pre-test commands to verify actual model fields, routes, forms
+  - **Speed-First Test Patterns**: Copy-paste templates for models, routes, and forms  
+  - **Actual Codebase Reference**: Live section updated with real structure (prevents hallucination)
+  - **Maintenance Commands**: Keep cheatsheet current with code changes
+  - **Prompt Templates**: Force AI to check actual structure before test generation
+  - **Implementation benefit**: Eliminates test failures from AI "forgetting" or "guessing" code structure
+  - **Time savings**: Prevents debugging tests that use non-existent fields/methods/imports
+  - **Quality improvement**: Tests always match actual codebase, not AI assumptions
+
+### Enhanced
+- **Documentation Integration** with TEST_CHEATSHEET.md
+  - Updated README.md Copilot Knowledge Base section  
+  - Enhanced reload_context.md documentation requirements
+  - Updated DECISION_FRAMEWORK.md with mandatory test verification steps
+  - Enhanced DEVELOPMENT.md testing guidelines with anti-guessing protocol
+  - Updated PROMPTS.md testing requests with mandatory verification steps
+
+### Enhanced
 - **Comprehensive Documentation Update** (June 11, 2025)
   - Added `reload_context.md` shortcut reference to all documentation files
   - Enhanced quick setup sections across all guides

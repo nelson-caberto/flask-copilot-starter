@@ -225,6 +225,8 @@ Please help me diagnose and fix this issue.
 
 ### Testing Requests
 ```
+🧪 CRITICAL: Before generating ANY test, check docs/copilot/TEST_CHEATSHEET.md first!
+
 Create comprehensive tests for [specific component/feature].
 
 Test requirements:
@@ -232,6 +234,12 @@ Test requirements:
 - [Test type 2]: [specific scenarios]
 - Edge cases: [list edge cases]
 - Coverage target: [percentage]%
+
+MANDATORY STEPS:
+1. Check TEST_CHEATSHEET.md for actual codebase structure
+2. Verify actual model fields, route paths, and form fields  
+3. Use real import paths from the codebase
+4. Generate tests using ONLY verified structure
 
 Include setup fixtures and mock data as needed.
 
