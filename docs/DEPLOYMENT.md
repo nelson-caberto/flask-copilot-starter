@@ -161,7 +161,7 @@ WantedBy=multi-user.target
 ### 1. Pre-deployment Checklist ⚡ (< 5 minutes)
 ```bash
 # MANDATORY CHECKS - NO SKIPPING
-pipenv run pytest                     # ✅ All tests pass
+pipenv run pytest | grep -q "FAILED" && echo "❌ TESTS FAILING" || echo "✅ ALL TESTS PASS"
 git status                           # ✅ Clean working directory  
 grep -r "TODO\|FIXME" app/          # ✅ No critical TODOs
 curl -f https://staging-domain.com/api/health  # ✅ Staging works

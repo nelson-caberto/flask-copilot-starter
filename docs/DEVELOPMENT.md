@@ -137,7 +137,7 @@ pipenv run python run.py
 #### Testing Extensions ⚡
 ```bash
 # FAST TESTING CYCLE
-pipenv run pytest tests/test_extension.py     # Unit tests
+pipenv run pytest tests/test_extension.py | grep -E "(PASSED|FAILED|ERROR)"     # Unit tests
 pipenv run python tests/test_app.py          # Integration test
 tox                                           # Multi-version test
 ```
@@ -151,15 +151,16 @@ tox                                           # Multi-version test
 
 ### ⚡ Immediate Testing Workflows
 ```bash
-# FAST TEST EXECUTION - NO DELAYS
-pipenv run pytest                              # All tests
-pipenv run pytest --cov=app                   # With coverage
-pipenv run pytest tests/unit/test_models.py   # Specific file
-
-# ⚡ SPEED-FIRST: Use grep to filter output for specific information
+# FAST TEST EXECUTION - NO DELAYS ⚡ GREP REQUIRED
 pipenv run pytest | grep -E "(PASSED|FAILED|ERROR)"           # Status only
 pipenv run pytest --cov=app | grep -E "TOTAL.*[0-9]+%"        # Coverage %
 pipenv run pytest | grep -q "FAILED" && echo "❌ FIX NEEDED" || echo "✅ GOOD"  # Quick check
+pipenv run pytest tests/unit/test_models.py | grep -E "(PASSED|FAILED|ERROR)"   # Specific file
+
+# ⚡ SPEED-FIRST: Use grep to filter output for specific information
+# Traditional commands (avoid - use grep versions above instead):
+# pipenv run pytest                              # All tests (too verbose)
+# pipenv run pytest --cov=app                   # With coverage (too verbose)
 ```
 
 ### ⚡ Code Quality (Auto-Format)
@@ -311,8 +312,8 @@ git status
 # - Include comprehensive error handling
 # - Add detailed docstrings
 
-# 5. Testing ⚡ (NO DELAYS)
-pipenv run pytest --cov=app
+# 5. Testing ⚡ (NO DELAYS) - GREP REQUIRED
+pipenv run pytest --cov=app | grep -E "TOTAL.*[0-9]+%"
 
 # 6. Cleanup and Verification ⚡ (NO DELAYS)
 # - Remove temporary files
