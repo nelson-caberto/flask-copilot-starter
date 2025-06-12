@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2025-06-12
+
+### Added
+- **Project Templates Directory** (`docs/templates/`)
+  - **Software Design Document (SDD) Template** (`SDD_TEMPLATE.md`)
+    - Comprehensive 500+ line technical architecture template
+    - Includes system architecture, data models, API design, security layers
+    - Performance requirements, deployment architecture, monitoring strategy
+    - Mermaid diagrams for architecture visualization
+    - Risk management and implementation planning sections
+  - **Software Development Specification (SDS) Template** (`SDS_TEMPLATE.md`)
+    - Complete 800+ line development requirements template
+    - Functional requirements, technical standards, testing strategy
+    - Development workflow, CI/CD pipeline, deployment specifications
+    - Success criteria, risk management, timeline planning
+    - Definition of Done and project governance frameworks
+
+### Enhanced
+- **Documentation Structure** updated to include templates directory
+- **Project README** now references comprehensive template resources
+- **Forked Project Support** - Templates enable professional documentation from day one
+
+### Benefits
+- **Enterprise-Ready Documentation** for forked projects
+- **Technical Architecture Planning** with proven templates
+- **Development Specification Standards** for team alignment
+- **Professional Project Governance** out of the box
+
 ## [1.6.1] - 2025-01-15
 
 ### Added

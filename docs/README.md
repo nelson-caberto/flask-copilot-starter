@@ -180,6 +180,10 @@ See [DEVELOPMENT.md](./DEVELOPMENT.md) for detailed setup instructions.
 - [Decision Framework](./copilot/DECISION_FRAMEWORK.md) - Quick decision guidelines
 - [Test Cheatsheet](./copilot/TEST_CHEATSHEET.md) - **🧪 Anti-guessing test generation** - Prevents AI from "forgetting" actual code structure
 
+### Project Templates
+- [Software Design Document (SDD)](./templates/SDD_TEMPLATE.md) - **🏗️ Complete technical architecture template** - System design, data models, security, performance, deployment
+- [Software Development Specification (SDS)](./templates/SDS_TEMPLATE.md) - **📋 Comprehensive development requirements** - Functional specs, technical standards, testing strategy, timeline
+
 ## ⚡ **Key Features**
 
 ### 🤖 **Speed-Optimized AI Development**
@@ -215,6 +219,7 @@ flask-copilot-starter/
 ├── tests/                  # Test modules
 ├── docs/                   # Documentation
 │   ├── copilot/           # Copilot collaboration knowledge base
+│   ├── templates/         # Project document templates (SDD, SDS)
 │   ├── COPILOT.md         # Main Copilot guide
 │   └── *.md               # Other documentation files
 ├── .vscode/               # VS Code configuration
@@ -244,4 +249,4 @@ flask-copilot-starter/
 - **Pipenv not working?** Ensure Python 3.8+ is installed and Pipenv is available (`pip install pipenv`)
 
 ---
-*Last updated: June 11, 2025*
+*Last updated: June 12, 2025*
