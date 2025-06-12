@@ -2,6 +2,8 @@
 
 > **COMPREHENSIVE BEST PRACTICES** | Focus: Critical gaps not automatically handled | Speed-First Implementation
 
+## ⚡ **AI Setup**: Say `reload_context.md` for instant project context
+
 ## ⚡ Critical Best Practices Not Automatically Handled
 
 ### 🔒 Security Hardening (MANDATORY)

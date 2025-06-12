@@ -2,6 +2,8 @@
 
 > **SPEED-FIRST INTERACTIONS** | Focus: Immediate Results | Anti-Paralysis Patterns
 
+## ⚡ **AI Setup**: Say `reload_context.md` for instant project context
+
 ## ⚡ Anti-Paralysis Interaction Patterns
 
 ### EMERGENCY Pattern: Analysis Paralysis Detection ⚡

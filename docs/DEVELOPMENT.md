@@ -3,8 +3,19 @@
 > **SPEED-FIRST DEVELOPMENT** | Focus: Immediate Action | Time-Boxed Workflows | Anti-Paralysis Measures
 
 ## ⚡ Quick Start (< 5 minutes)
+
+### ⚡ **AI Setup**: Just say `reload_context.md` for instant context loading
+
+### ⚡ **Environment Setup** (Manual if needed)
 ```bash
-# IMMEDIATE## ⚡ Testing Guidelines (Speed-First)
+# IMMEDIATE SETUP - NO ANALYSIS
+git clone <your-repo>
+cd flask-copilot-starter
+pipenv install --dev
+pipenv shell
+```
+
+## ⚡ Testing Guidelines (Speed-First)
 
 ### ⚡ Speed-First Test Execution Patterns
 **MANDATORY: Use grep to filter pytest output for efficiency**

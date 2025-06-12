@@ -2,6 +2,8 @@
 
 > **SPEED-FIRST DEPLOYMENT** | Focus: Immediate Production Ready | No Over-Engineering
 
+## ⚡ **AI Setup**: Say `reload_context.md` for instant project context
+
 ## ⚡ Quick Deployment (< 30 minutes total)
 ```bash
 # IMMEDIATE DEPLOYMENT CHECKLIST - NO ANALYSIS

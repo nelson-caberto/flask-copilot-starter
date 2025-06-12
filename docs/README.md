@@ -25,7 +25,9 @@ code .
 ```
 
 ### 3. **Configure AI Model** (2 minutes)
-**⚠️ CRITICAL**: AI models don't auto-read project guidelines. Use this prompt:
+**⚡ SPEED SHORTCUT**: Just say `reload_context.md` for instant AI context loading!
+
+**Alternative - Manual Setup**: If the shortcut doesn't work, use this prompt:
 
 ```
 Before we start, please read these files to understand this project:

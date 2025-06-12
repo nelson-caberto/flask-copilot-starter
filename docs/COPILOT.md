@@ -2,6 +2,8 @@
 
 ## ⚡ **Speed-First Collaboration**
 
+### ⚡ **INSTANT SETUP**: Say `reload_context.md` for immediate AI context loading
+
 ### Essential Copilot Commands (< 30 seconds each)
 - **Quick implementation**: "Use the simplest Flask pattern and implement now"
 - **Copy existing**: "Find similar code in the project and adapt it for [task]"  

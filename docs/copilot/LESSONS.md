@@ -2,6 +2,8 @@
 
 > **SPEED-FIRST COLLABORATION** | Focus: Anti-Paralysis Mastery | High-Velocity Development
 
+## ⚡ **AI Setup**: Say `reload_context.md` for instant project context
+
 ## ⚡ Critical Anti-Paralysis Insights
 
 ### LESSON 1: The 2-Minute Decision Rule ⚡

@@ -2,6 +2,8 @@
 
 > **SPEED-FIRST API DEVELOPMENT** | Focus: Immediate Implementation | No Over-Engineering
 
+## ⚡ **AI Setup**: Say `reload_context.md` for instant project context
+
 ## ⚡ Quick API Testing
 ```bash
 # IMMEDIATE HEALTH CHECK - NO SETUP REQUIRED

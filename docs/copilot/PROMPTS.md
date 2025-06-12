@@ -2,6 +2,8 @@
 
 ## ⚡ **SPEED-FIRST PROMPTS** - Anti-Analysis Paralysis
 
+## ⚡ **AI Setup**: Say `reload_context.md` for instant project context
+
 ## Quick Decision Prompts (Use These First)
 
 ### ⚡ Immediate Action Prompt

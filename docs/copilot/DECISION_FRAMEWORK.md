@@ -1,5 +1,7 @@
 # Quick Decision Framework for Copilot Collaboration
 
+## ⚡ **AI Setup**: Say `reload_context.md` for instant project context
+
 ## ⚡ **SPEED RULES**: Default to action over analysis
 
 **PRIMARY RULE**: Choose the simplest solution and ship it. Perfect is the enemy of good.
