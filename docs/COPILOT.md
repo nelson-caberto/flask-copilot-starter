@@ -24,9 +24,21 @@
 
 ### ⚡ Development Phase (< 25 minutes)
 1. **Implement** (15 minutes) - Use established patterns
-2. **Test** (5 minutes) - Copy existing test structure  
+2. **Test** (5 minutes) - Copy existing test structure, use grep for fast results
 3. **Document** (3 minutes) - Update relevant docs
 4. **Commit** (2 minutes) - Standard commit message
+
+### ⚡ Speed-First Testing Commands
+```bash
+# IMMEDIATE test status - use these instead of full pytest output
+pytest | grep -q "FAILED" && echo "❌ FIX NEEDED" || echo "✅ READY TO SHIP"
+
+# Fast failure analysis - get details quickly
+pytest -x --tb=short | grep -A 5 -B 1 "FAILED\|ERROR"
+
+# Coverage check - percentage only
+pytest --cov=app | grep -E "TOTAL.*[0-9]+%"
+```
 
 ### ⚡ Anti-Paralysis Rules
 - **NO analysis loops** - Make decision and proceed

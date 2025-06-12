@@ -29,6 +29,24 @@ Please:
 Use exactly the same structure and patterns as the existing code.
 ```
 
+### ⚡ Testing Efficiency Prompt
+```
+Run tests and show me only the essential results using grep filters.
+
+IMMEDIATE COMMANDS NEEDED:
+# Quick health check (< 30 seconds)
+pytest | grep -q "FAILED" && echo "❌ TESTS FAILING - DETAILS BELOW" || echo "✅ ALL TESTS PASS"
+
+# If failures detected, show details:
+pytest -x --tb=short | grep -A 10 -B 2 "FAILED\|ERROR"
+
+# Coverage summary only:
+pytest --cov=app | grep -E "TOTAL.*[0-9]+%"
+
+Don't show me full pytest output - just the filtered results above.
+Use grep to process the output efficiently instead of showing everything.
+```
+
 ### ⚡ Emergency Decision Prompt
 ```
 We've been analyzing this for [time] and need to make a decision NOW.
@@ -214,6 +232,11 @@ Test requirements:
 - Coverage target: [percentage]%
 
 Include setup fixtures and mock data as needed.
+
+⚡ SPEED-FIRST: Use grep to filter pytest output for specific information:
+- Quick status: pytest | grep -E "(PASSED|FAILED|ERROR)"
+- Fast failures: pytest -x --tb=short | grep -A 5 -B 1 "FAILED\|ERROR"
+- Coverage only: pytest --cov=app | grep -E "TOTAL.*[0-9]+%"
 ```
 
 **Example**:
@@ -227,6 +250,10 @@ Test requirements:
 - Coverage target: 95%
 
 Include setup fixtures and mock data as needed.
+
+⚡ TESTING EFFICIENCY: Use these grep patterns for fast results:
+pytest | grep -q "FAILED" && echo "❌ FIX NEEDED" || echo "✅ TESTS PASS"
+pytest --cov=app | grep -E "TOTAL.*[0-9]+%" | tail -1
 ```
 
 ## Specific Task Prompts

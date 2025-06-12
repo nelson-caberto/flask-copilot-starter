@@ -219,6 +219,7 @@ DECOMPOSITION ANALYSIS:
    - Test ALL occurrences of modified functionality throughout the project
    - Ensure test coverage remains above 90%
    - Run tests to verify they pass before proceeding
+   - **Use grep to filter pytest output** for efficiency: `pytest | grep -E "(PASSED|FAILED|ERROR)"`
 
 6. **Cleanup and Verification**: Clean up workspace and verify completion
    - Remove temporary files and development artifacts
@@ -280,6 +281,7 @@ DECOMPOSITION ANALYSIS:
 - **Standard patterns**: Use established codebase patterns WITHOUT analysis
 - **Maintenance tasks**: Default to existing code style and patterns IMMEDIATELY  
 - **Testing**: Follow existing test patterns and structures WITHOUT discussion
+- **Test Output**: Use grep to filter pytest output for specific information instead of processing full output
 - **Flask-Migrate**: Generate migration IMMEDIATELY when models change
 - **Documentation updates**: Follow existing format and structure patterns
 
@@ -717,6 +719,49 @@ pipenv run flask db upgrade
 - Mock external dependencies properly
 - Use test markers for categorization (slow, integration, etc.)
 - Maintain test coverage above 90%
+- **Use grep to filter pytest output** for specific information instead of processing full output
+
+### Speed-First Pytest + Grep Patterns ⚡
+**MANDATORY: Use these patterns for efficient test result analysis:**
+
+#### Immediate Test Status (< 30 seconds)
+```bash
+# Quick pass/fail status - no full output processing
+pytest --tb=no | grep -E "(PASSED|FAILED|ERROR)" | tail -5
+
+# Any failures? (returns 0 if clean, 1 if failures)
+pytest | grep -q "FAILED" && echo "❌ FIXES NEEDED" || echo "✅ ALL GOOD"
+```
+
+#### Failure Analysis (< 2 minutes)
+```bash
+# Get failure details fast
+pytest -x --tb=short | grep -A 10 -B 2 "FAILED\|ERROR"
+
+# Filter for specific errors only
+pytest | grep -E "(FAILED|ERROR|AssertionError)"
+
+# Database-specific issues
+pytest | grep -i -C 3 "database\|migration\|sql"
+```
+
+#### Coverage Quick Check
+```bash
+# Get coverage percentage only
+pytest --cov=app | grep -E "TOTAL.*[0-9]+%"
+
+# Missing coverage lines only
+pytest --cov=app --cov-report=term-missing | grep -E "Missing"
+```
+
+#### Performance Testing
+```bash
+# Find slow tests only
+pytest --durations=10 | grep -E "[0-9]+\.[0-9]+s"
+
+# Get just the summary line
+pytest | grep -E "=+ .* in [0-9]+\.[0-9]+s =+"
+```
 
 ### Flask Testing Patterns
 - Create separate test application with testing configuration

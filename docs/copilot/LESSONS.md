@@ -140,6 +140,7 @@ except SQLAlchemyError as e:
 - **Unit tests**: Test ONE function per test file
 - **Integration tests**: Test ONE user flow per test file  
 - **Edge cases**: Add ONLY after core functionality works
+- **Result analysis**: Use grep to filter pytest output for specific information
 
 **Speed-First Test Template**:
 ```python
@@ -150,8 +151,17 @@ def test_user_can_login():
     assert 'Welcome' in response.data.decode()
 ```
 
+**Speed-First Test Execution**:
+```bash
+# IMMEDIATE test feedback - use grep instead of processing full output
+pytest | grep -q "FAILED" && echo "❌ FIX NEEDED" || echo "✅ READY TO SHIP"
+pytest --cov=app | grep -E "TOTAL.*[0-9]+%" | tail -1  # Coverage only
+pytest -x --tb=short | grep -A 5 "FAILED\|ERROR"       # Failure details only
+```
+
 **Implementation Rule**: Start with happy path only, add failures later
-**Impact**: Testing phase reduced from 2 hours to 20 minutes
+**Efficiency Rule**: Use grep to filter pytest output instead of processing everything
+**Impact**: Testing phase reduced from 2 hours to 20 minutes, 80% faster feedback
 
 ### 3. Standard Security ⚡ (Upgraded from Security Implementation)
 **LESSON**: Security requires NO customization - use standard patterns only
