@@ -166,6 +166,7 @@ See [DEVELOPMENT.md](./DEVELOPMENT.md) for detailed setup instructions.
 - [Copilot Collaboration Guide](./COPILOT.md) - GitHub Copilot best practices and workflows
 - [API Documentation](./API.md) - REST API endpoints and usage
 - [Development Guide](./DEVELOPMENT.md) - Setup and development workflow
+- [Best Practices Guide](./BEST_PRACTICES.md) - Security, monitoring, and production readiness
 - [Deployment Guide](./DEPLOYMENT.md) - Production deployment instructions
 - [Change Log](./CHANGELOG.md) - Version history and changes
 
