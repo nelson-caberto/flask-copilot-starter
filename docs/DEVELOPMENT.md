@@ -420,7 +420,17 @@ flask-extension-name/
 └── README.md               # Extension documentation
 ```
 
+## Project Documentation Templates
+- [Software Design Document (SDD)](./templates/SDD_TEMPLATE.md) - Complete technical architecture template
+- [Software Development Specification (SDS)](./templates/SDS_TEMPLATE.md) - Development requirements specification
+
+Use these templates when:
+- Starting a new feature that requires clear architecture documentation
+- Planning a major system component
+- Documenting project requirements for team alignment
+- Creating professional documentation for stakeholders
+
 ---
 
-*Last updated: June 11, 2025 - Enhanced with speed-first anti-paralysis measures*
+*Last updated: June 12, 2025 - Enhanced with project documentation templates*
 *This guide evolves with the project. Update it regularly to reflect new patterns and workflows.*

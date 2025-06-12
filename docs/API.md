@@ -167,6 +167,12 @@ def test_extension_api():
 - [ ] ⚡ Create basic test case
 - [ ] ⚡ Update CHANGELOG.md
 
+## Related Documentation
+- [Development Guide](./DEVELOPMENT.md) - Setup and development workflow
+- [Best Practices](./BEST_PRACTICES.md) - Flask security and production guidelines
+- [SDD Template](./templates/SDD_TEMPLATE.md) - Complete technical architecture for Flask applications & extensions
+- [SDS Template](./templates/SDS_TEMPLATE.md) - Development specifications for Flask applications & extensions
+
 ---
-*Last updated: June 11, 2025 - Enhanced with speed-first API development patterns*
+*Last updated: June 12, 2025 - Enhanced with Flask application & extension templates*
 *Update this documentation whenever API endpoints are added, modified, or removed.*

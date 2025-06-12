@@ -117,5 +117,5 @@ pytest --cov=app | grep -E "TOTAL.*[0-9]+%"
 
 ---
 
-*Last updated: June 11, 2025*
+*Last updated: June 12, 2025*
 *This guide evolves with your project. Update it regularly to capture new insights and improve collaboration effectiveness.*

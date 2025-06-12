@@ -247,6 +247,12 @@ curl -w "%{time_total}" https://your-domain.com/api/health # Response time
 3. 🚀 **INVESTIGATE** in staging environment only
 4. 📖 **DOCUMENT** issue for post-mortem analysis
 
+## Related Documentation
+- [Development Guide](./DEVELOPMENT.md) - Setup and development workflow
+- [Best Practices](./BEST_PRACTICES.md) - Security and production guidelines
+- [SDD Template](./templates/SDD_TEMPLATE.md) - Technical architecture documentation
+- [SDS Template](./templates/SDS_TEMPLATE.md) - Development specification
+
 ---
-*Last updated: June 11, 2025 - Enhanced with speed-first deployment patterns*
+*Last updated: June 12, 2025 - Enhanced with deployment templates*
 *Update this guide when deployment processes or infrastructure requirements change.*

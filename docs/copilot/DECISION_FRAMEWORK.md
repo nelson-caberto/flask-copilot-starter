@@ -168,6 +168,14 @@ What to Test?
 
 **Core Principle**: Ship working solutions in 30 minutes or less. Perfect solutions never ship.
 
+## 📋 For Complex Architecture Decisions
+
+When planning major architectural components:
+- Use [Software Design Document (SDD) Template](../templates/SDD_TEMPLATE.md) for technical architecture
+- Use [Software Development Specification (SDS) Template](../templates/SDS_TEMPLATE.md) for requirements
+
+Templates provide structure while maintaining velocity through pre-defined sections and decision frameworks.
+
 ---
-*Last updated: June 11, 2025*
+*Last updated: June 12, 2025 - Enhanced with documentation templates*
 *Use this framework to maintain velocity while ensuring quality. When in doubt, choose the simple path.*

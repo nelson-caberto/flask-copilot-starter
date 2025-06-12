@@ -82,6 +82,7 @@ Please explicitly state: "I have read the project guidelines and commit to follo
 - [ ] AI commits to following existing documentation structure
 - [ ] AI knows Flask conventions take priority
 - [ ] AI commits to minimal viable implementations first
+- [ ] AI is aware of template resources (SDD/SDS) for complex projects
 
 ---
 
@@ -92,7 +93,17 @@ Please explicitly state: "I have read the project guidelines and commit to follo
 app/
 ├── models/         # SQLAlchemy models
 ├── routes/         # Flask blueprints
-├── templates/      # Jinja2 templates  
+├── templates/      # Jinja2 templates
+...
+docs/
+├── copilot/       # Copilot collaboration knowledge base
+├── templates/     # Project document templates (SDD, SDS)
+```
+
+### **Documentation Templates**
+For complex projects, use the established templates:
+- `docs/templates/SDD_TEMPLATE.md` - Software Design Document for technical architecture
+- `docs/templates/SDS_TEMPLATE.md` - Software Development Specification for requirements
 ├── static/         # CSS, JS, images
 └── __init__.py     # App factory
 
@@ -170,5 +181,5 @@ git add . && git commit -m "feat: [description]"
 
 ---
 
-*Last updated: June 11, 2025*  
+*Last updated: June 12, 2025*  
 *Usage: Just say "reload_context.md" for instant AI context loading*
