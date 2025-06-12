@@ -163,6 +163,7 @@ Remember to follow the 8-step workflow and ask for permission before making chan
 See [DEVELOPMENT.md](./DEVELOPMENT.md) for detailed setup instructions.
 
 ## Documentation Structure
+- [AI Context Loading Guide](./AI_CONTEXT_LOADING.md) - **Essential for new AI instances** - Complete context reload procedures
 - [Copilot Collaboration Guide](./COPILOT.md) - GitHub Copilot best practices and workflows
 - [API Documentation](./API.md) - REST API endpoints and usage
 - [Development Guide](./DEVELOPMENT.md) - Setup and development workflow
@@ -219,6 +220,7 @@ flask-copilot-starter/
 ```
 
 ## Getting Help
+- **New AI instance?** Start with the [AI Context Loading Guide](./AI_CONTEXT_LOADING.md) for complete setup
 - **New to this project?** Start with the [Getting Started](#getting-started) section above
 - **Setting up Copilot?** Follow the [VS Code setup instructions](#2-set-up-vs-code-with-github-copilot)
 - **AI collaboration help**: Read the [Copilot Collaboration Guide](./COPILOT.md)
