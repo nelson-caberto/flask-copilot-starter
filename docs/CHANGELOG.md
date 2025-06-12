@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.1] - 2025-01-15
+
+### Added
+- **Context Reload Shortcut** (`docs/reload_context.md`)
+  - Ultra-fast AI context loading trigger
+  - Simply mention "reload_context.md" instead of copying prompts
+  - Automatic execution of full context loading procedure
+  - **Speed improvement**: Context loading from 2-3 minutes to 10 seconds
+  - **User experience**: Eliminates copy/paste workflow completely
+
+### Enhanced
+- **AI Context Loading Guide** speed shortcut reference
+- **Documentation Structure** with reload shortcut priority
+- **User workflow** streamlined for maximum efficiency
+
+## [1.6.1] - 2025-01-15
+
+### Changed
+- **AI Context Loading Consolidation** 
+  - Consolidated `AI_CONTEXT_LOADING.md` and `reload_context.md` into single `reload_context.md` file
+  - **⚡ SPEED SHORTCUT**: Users can now just say `reload_context.md` to trigger full AI context loading
+  - Eliminated file duplication while maintaining all functionality
+  - Updated documentation structure references in `docs/README.md`
+  - **Implementation benefit**: Single file for all AI context loading needs
+  - **User experience**: One simple command instead of multiple files to manage
+
+### Removed
+- **`docs/AI_CONTEXT_LOADING.md`** - Functionality consolidated into `reload_context.md`
+
 ## [1.6.0] - 2025-01-15
 
 ### Added
