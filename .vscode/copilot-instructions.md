@@ -1,3 +1,4 @@
+`````````instructions
 ````````instructions
 # Flask Development Copilot Instructions
 
@@ -949,63 +950,98 @@ pytest --tb=short | grep -A 5 FAILED
 pytest --screenshot only-on-failure tests/e2e/
 ```
 
-### Always Runnable Code Rule ⚡
+### Pipenv Environment Management ⚡
 
-#### CRITICAL: Keep Code Runnable at All Times
-- **Every commit must run**: No broken intermediate states
-- **Test before commit**: Ensure all changes are functional
-- **Incremental changes**: Break large changes into runnable steps
-- **Revert if broken**: If tests fail, revert to last working state
-
-#### Implementation Strategy
-1. **Start from working state**
-   - Verify current version runs
-   - Run all tests before changes
-   - Check git status is clean
-
-2. **Make atomic changes**
-   - One functional change at a time
-   - Test after each change
-   - Commit working increments
-
-3. **Emergency fixes**
-   - Fix failing tests immediately
-   - Don't stack changes on broken code
-   - Roll back if can't fix quickly
-
-#### Example Workflow
+#### Initial Setup (< 2 minutes)
 ```bash
-# 1. Verify starting state
-pytest
-python run.py  # or flask run
+# 1. Install Pipenv if not installed
+pip install pipenv
 
-# 2. Make small change
-# Edit one file/feature
+# 2. Install dependencies
+pipenv install  # Production deps
+pipenv install --dev  # Development deps
 
-# 3. Verify still runs
-pytest
-python run.py
-
-# 4. Commit if working
-git commit -m "feat: add X (verified running)"
-
-# If broken:
-git reset --hard  # Return to last working state
+# 3. Activate environment
+pipenv shell
 ```
 
-### Speed-First Runnable Guidelines ⚡
-1. **Ship Fast, Ship Working**
-   - Minimal viable implementation
-   - Must pass core tests
-   - Must start and run
+#### Daily Development Commands
+```bash
+# Start development server
+pipenv run flask run
 
-2. **No Broken WIP**
-   - Don't commit broken code
-   - Don't stack changes on failures
-   - Keep main branch always runnable
+# Run tests
+pipenv run pytest
 
-3. **Quick Recovery**
-   - Know how to revert changes
-   - Keep last working version tagged
-   - Document startup requirements
+# Database operations
+pipenv run flask db migrate -m "Description"
+pipenv run flask db upgrade
+
+# Install new dependencies
+pipenv install package-name  # Production
+pipenv install --dev package-name  # Development only
+```
+
+#### Speed-First Pipenv Guidelines ⚡
+1. **Quick Environment Check**
+   ```bash
+   # Verify environment
+   pipenv verify
+   
+   # Check dependencies
+   pipenv graph
+   
+   # Update all packages
+   pipenv update
+   ```
+
+2. **Emergency Recovery**
+   ```bash
+   # Reset environment
+   pipenv --rm
+   pipenv install --dev
+   
+   # Clean unused packages
+   pipenv clean
+   
+   # Regenerate lockfile
+   pipenv lock
+   ```
+
+3. **Virtual Environment Rules**
+- Always use Pipenv for dependency management
+- Keep Pipfile.lock in version control
+- Run all commands through pipenv
+- Use `pipenv shell` for long sessions
+- Use `pipenv run` for single commands
+
+#### Common Issues & Solutions
+```bash
+# Dependencies not found
+pipenv install --skip-lock
+pipenv lock --clear
+
+# Environment not working
+pipenv --rm
+pipenv install --dev
+
+# Wrong Python version
+pipenv --python 3.8  # Specify version
+```
+
+### Dependency Management Guidelines
+1. **Adding Dependencies**
+   - Add to Pipfile directly for clarity
+   - Use exact versions for critical packages
+   - Document why each package is needed
+
+2. **Updating Dependencies**
+   - Update one package at a time
+   - Test after each update
+   - Keep track of breaking changes
+
+3. **Security Updates**
+   - Run `pipenv check` regularly
+   - Update vulnerable packages immediately
+   - Keep track of security advisories
 ``````
