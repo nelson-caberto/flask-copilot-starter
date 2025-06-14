@@ -1,4 +1,4 @@
-```````instructions
+````````instructions
 # Flask Development Copilot Instructions
 
 ## Project Context
@@ -949,32 +949,63 @@ pytest --tb=short | grep -A 5 FAILED
 pytest --screenshot only-on-failure tests/e2e/
 ```
 
-### Test Directory Structure ⚡
+### Always Runnable Code Rule ⚡
+
+#### CRITICAL: Keep Code Runnable at All Times
+- **Every commit must run**: No broken intermediate states
+- **Test before commit**: Ensure all changes are functional
+- **Incremental changes**: Break large changes into runnable steps
+- **Revert if broken**: If tests fail, revert to last working state
+
+#### Implementation Strategy
+1. **Start from working state**
+   - Verify current version runs
+   - Run all tests before changes
+   - Check git status is clean
+
+2. **Make atomic changes**
+   - One functional change at a time
+   - Test after each change
+   - Commit working increments
+
+3. **Emergency fixes**
+   - Fix failing tests immediately
+   - Don't stack changes on broken code
+   - Roll back if can't fix quickly
+
+#### Example Workflow
+```bash
+# 1. Verify starting state
+pytest
+python run.py  # or flask run
+
+# 2. Make small change
+# Edit one file/feature
+
+# 3. Verify still runs
+pytest
+python run.py
+
+# 4. Commit if working
+git commit -m "feat: add X (verified running)"
+
+# If broken:
+git reset --hard  # Return to last working state
 ```
-tests/
-├── critical/           # High-priority tests (Run First)
-├── unit/              # Unit tests
-├── api/               # API tests
-├── e2e/               # Browser tests
-│   ├── pages/        # Page objects
-│   ├── conftest.py   # Fixtures
-│   └── test_*.py     # Test files
-└── conftest.py       # Global fixtures
-```
 
-### Emergency Test Protocol ⚡
-1. Run critical tests FIRST:
-   ```bash
-   pytest tests/critical/
-   ```
+### Speed-First Runnable Guidelines ⚡
+1. **Ship Fast, Ship Working**
+   - Minimal viable implementation
+   - Must pass core tests
+   - Must start and run
 
-2. If critical tests pass, run specific area:
-   ```bash
-   pytest tests/e2e/test_login.py
-   ```
+2. **No Broken WIP**
+   - Don't commit broken code
+   - Don't stack changes on failures
+   - Keep main branch always runnable
 
-3. If tests fail, get quick debug info:
-   ```bash
-   pytest -x --tb=short | grep -A 5 FAILED
-   ```
+3. **Quick Recovery**
+   - Know how to revert changes
+   - Keep last working version tagged
+   - Document startup requirements
 ``````
