@@ -1,4 +1,4 @@
-````instructions
+```````instructions
 # Flask Development Copilot Instructions
 
 ## Project Context
@@ -721,231 +721,260 @@ pipenv run flask db upgrade
 - Maintain test coverage above 90%
 - **Use grep to filter pytest output** for specific information instead of processing full output
 
-### Speed-First Pytest + Grep Patterns ⚡
-**MANDATORY: Use these patterns for efficient test result analysis:**
+### Testing Tools
+1. **Unit & Integration Tests**: pytest
+2. **Browser & E2E Tests**: pytest-playwright
+3. **Test Organization**: conftest.py fixtures
 
-#### Immediate Test Status (< 30 seconds)
+### Test Types & Tools Matrix ⚡
+| Test Type | Tool | Priority | Time Limit | Example |
+|-----------|------|----------|------------|---------|
+| Unit | pytest | HIGH | < 2 min/test | `test_user_model.py` |
+| API | pytest | HIGH | < 3 min/test | `test_auth_api.py` |
+| Browser/E2E | playwright | MEDIUM | < 5 min/test | `test_login_flow.py` |
+| Visual | playwright | LOW | < 2 min/test | `test_responsive.py` |
+
+### Speed-First Testing Guidelines ⚡
+1. **Start Simple, Ship Fast**
+   - Write minimal passing test first
+   - Add complexity only after basics work
+   - Ship with core test coverage
+
+2. **Prioritize Test Types**
+   ```bash
+   # 1. Unit Tests (REQUIRED) - < 2 min each
+   pytest tests/unit/
+
+   # 2. API Tests (REQUIRED) - < 3 min each
+   pytest tests/api/
+
+   # 3. Critical E2E (Only key flows) - < 5 min each
+   pytest tests/e2e/test_critical.py
+
+   # 4. Visual/Responsive (If needed) - < 2 min each
+   pytest tests/e2e/test_visual.py
+   ```
+
+3. **Emergency Test Protocol** (When time critical)
+   ```bash
+   # 1. Run only changed files
+   pytest tests/unit/test_changed.py
+
+   # 2. Run only critical paths
+   pytest tests/e2e/test_critical.py
+
+   # 3. Skip slow tests
+   pytest -m "not slow"
+   ```
+
+4. **Quick Test Status** (< 30 seconds)
+   ```bash
+   # Fast overview
+   pytest --tb=no | grep -E "(PASSED|FAILED|ERROR)" | tail -5
+
+   # Critical test status
+   pytest tests/e2e/test_critical.py -v | grep -E "(PASSED|FAILED)"
+
+   # Coverage check
+   pytest --cov=app | grep -E "TOTAL.*[0-9]+%"
+   ```
+
+### Browser Testing with Playwright ⚡
+#### Core Principles
+- **Use for critical user flows**: Login, signup, core business processes
+- **Test responsive design**: Mobile, tablet, desktop viewports
+- **Verify JavaScript interactions**: Dynamic UIs, client-side validation 
+- **Cross-browser compatibility**: Chrome, Firefox, Safari
+
+#### Speed-First Test Generation ⚡
+1. **Start with flow only** (< 5 minutes):
+   - Happy path user journey
+   - Most frequent user action
+   - Skip edge cases initially
+
+2. **Add core validations** (< 10 minutes):
+   - Basic form validation
+   - Error messages
+   - Success states
+
+3. **Optimize later** (if needed):
+   - Device testing
+   - Visual regression
+   - Network conditions
+
+### MANDATORY: Browser Test Setup ⚡
 ```bash
-# Quick pass/fail status - no full output processing
-pytest --tb=no | grep -E "(PASSED|FAILED|ERROR)" | tail -5
+# 1. Install pytest-playwright (REQUIRED)
+pip install pytest-playwright
 
-# Any failures? (returns 0 if clean, 1 if failures)
-pytest | grep -q "FAILED" && echo "❌ FIXES NEEDED" || echo "✅ ALL GOOD"
+# 2. Install browsers (run ONE of these)
+playwright install chromium  # Fastest for CI/CD
+playwright install firefox   # For Firefox-specific testing
+playwright install webkit   # For Safari testing
+
+# 3. Create test structure (REQUIRED)
+mkdir -p tests/e2e/pages  # For page objects
+touch tests/e2e/conftest.py  # For fixtures
+touch tests/e2e/test_critical_flows.py  # For tests
 ```
 
-#### Failure Analysis (< 2 minutes)
-```bash
-# Get failure details fast
-pytest -x --tb=short | grep -A 10 -B 2 "FAILED\|ERROR"
+### Speed-First Playwright Patterns ⚡
 
-# Filter for specific errors only
-pytest | grep -E "(FAILED|ERROR|AssertionError)"
-
-# Database-specific issues
-pytest | grep -i -C 3 "database\|migration\|sql"
-```
-
-#### Coverage Quick Check
-```bash
-# Get coverage percentage only
-pytest --cov=app | grep -E "TOTAL.*[0-9]+%"
-
-# Missing coverage lines only
-pytest --cov=app --cov-report=term-missing | grep -E "Missing"
-```
-
-#### Performance Testing
-```bash
-# Find slow tests only
-pytest --durations=10 | grep -E "[0-9]+\.[0-9]+s"
-
-# Get just the summary line
-pytest | grep -E "=+ .* in [0-9]+\.[0-9]+s =+"
-```
-
-### Flask Testing Patterns
-- Create separate test application with testing configuration
-- Use clean database sessions for each test
-- Test both success and error scenarios
-- Include authentication fixtures for API tests
-- Test template rendering and context variables
-
-### Database Testing Safety
-- **NEVER use production database for testing**
-- Use separate test database (SQLite in-memory or dedicated test DB)
-- Configure test database URL in testing configuration
-- Use database transactions that rollback after each test
-- Create fresh database schema for each test session
-- Drop all test data after test completion
-
-### Test Database Configuration
-- Use in-memory SQLite for fast, isolated tests: `sqlite:///:memory:`
-- Alternative: separate test database with naming convention (e.g., `myapp_test.db`)
-- Set `SQLALCHEMY_DATABASE_URI` to test database in testing config
-- Never use environment variables that point to production database
-- Use database name suffixes like `_test` to clearly identify test databases
-
-### Production Database Protection
-- Use database backup strategies before any testing that might touch production
-- Implement database connection verification in test setup
-- Use separate database user with limited permissions for testing
-- Add assertion checks to verify test database connection
-- Use database URL validation to prevent accidental production access
-- Implement database migration rollback procedures for development testing
-
-## Error Handling
-
-### Custom Error Pages
-- Create custom error handlers for common HTTP errors
-- Include database rollback in 500 error handlers
-- Use proper HTTP status codes
-- Log errors appropriately
-
-### Logging
-- Configure rotating file handlers for production
-- Use appropriate log levels (DEBUG, INFO, WARNING, ERROR)
-- Include structured logging with timestamps and context
-
-## Dependencies
-
-### Flask Application Dependencies
-
-#### Core Application Stack
-- Flask - Web framework
-- Flask-WTF - Forms and CSRF protection
-- python-dotenv - Environment variables (auto-loaded by Pipenv)
-- Flask-SQLAlchemy - Database ORM
-- Flask-Migrate - Database migrations
-- gunicorn - Production WSGI server
-
-#### Application Development Tools
-- pytest - Testing framework
-- coverage - Test coverage
-- black - Code formatting
-- flake8 - Linting
-
-### Flask Extension Dependencies
-
-#### Core Extension Stack
-- Flask - Core framework (minimum supported version)
-- setuptools - For packaging and distribution
-- wheel - For building wheel distributions
-
-#### Extension Development Tools
-- pytest - Testing framework
-- tox - Testing across Python versions
-- coverage - Test coverage reporting
-- black - Code formatting
-- flake8 - Linting
-- sphinx - Documentation generation
-- twine - PyPI publishing
-
-#### Extension Packaging Files
+#### 1. Quick Test Development (< 2 minutes per test)
 ```python
-# setup.py example for Flask extension
-from setuptools import setup, find_packages
+# tests/e2e/test_critical_flows.py
+from playwright.sync_api import expect
 
-setup(
-    name='Flask-ExtensionName',
-    version='1.0.0',
-    packages=find_packages(),
-    install_requires=['Flask>=1.0'],
-    python_requires='>=3.6',
-    author='Your Name',
-    author_email='your.email@example.com',
-    description='A Flask extension for...',
-    long_description=open('README.md').read(),
-    long_description_content_type='text/markdown',
-    url='https://github.com/yourusername/flask-extensionname',
-    classifiers=[
-        'Framework :: Flask',
-        'Programming Language :: Python :: 3',
-        'License :: OSI Approved :: MIT License',
-    ],
-)
+def test_login_quick(page):
+    """Minimal login test - implement first"""
+    page.goto("/login")
+    page.fill("[data-testid=email]", "test@example.com")
+    page.fill("[data-testid=password]", "password123")
+    page.click("[data-testid=login-button]")
+    expect(page).to_have_url("/dashboard")
+
+def test_registration_quick(page):
+    """Minimal registration test - implement first"""
+    page.goto("/register")
+    page.fill("[data-testid=email]", "new@example.com")
+    page.fill("[data-testid=password]", "newpass123")
+    page.click("[data-testid=register-button]")
+    expect(page).to_have_url("/dashboard")
 ```
 
-### Dependency Management
+#### 2. Page Object Pattern (Add after basics work)
+```python
+# tests/e2e/pages/login_page.py
+class LoginPage:
+    def __init__(self, page):
+        self.page = page
+        self.email_input = page.locator("[data-testid=email]")
+        self.password_input = page.locator("[data-testid=password]")
+        self.login_button = page.locator("[data-testid=login-button]")
+    
+    def login(self, email, password):
+        self.page.goto("/login")
+        self.email_input.fill(email)
+        self.password_input.fill(password)
+        self.login_button.click()
+```
 
-#### For Flask Applications (using Pipenv)
-- Use `pipenv install <package>` for production dependencies
-- Use `pipenv install <package> --dev` for development dependencies
-- Pipenv automatically creates and manages virtual environments
-- Use `pipenv shell` to activate the virtual environment
-- Use `pipenv run <command>` to run commands in the virtual environment
+#### 3. Data-Testid Conventions (REQUIRED)
+```html
+<!-- ALWAYS add data-testid to elements -->
+<input data-testid="email" type="email">
+<button data-testid="submit-button">Submit</button>
+<div data-testid="error-message">Invalid input</div>
+```
 
-#### For Flask Extensions (using setuptools)
-- Define runtime dependencies in `install_requires`
-- Define development dependencies in `requirements-dev.txt` or `extras_require`
-- Use `pip install -e .` for development installation
-- Use `tox` for testing across multiple Python/Flask versions
-- Specify minimum Flask version compatibility
+### Quick Testing Commands ⚡
+```bash
+# Run all E2E tests (CI/CD mode)
+pytest --browser chromium --headless tests/e2e/
 
-## Code Generation Guidelines
+# Development mode (with browser visible)
+pytest --browser chromium --headed tests/e2e/test_login.py
 
-**IMPORTANT: Always ask for explicit permission before creating, modifying, or deleting any files. This includes creating new files, editing existing files, or removing files. Never perform any file operations without user consent.**
+# Run tests on multiple browsers
+pytest --browser chromium --browser firefox tests/e2e/
 
-### Flask Application Code Generation
+# Screenshot on failure
+pytest --screenshot only-on-failure tests/e2e/
 
-When generating Flask application code:
+# Record video for failing tests
+pytest --video retain-on-failure tests/e2e/
+```
 
-1. **Always include error handling** and proper HTTP status codes
-2. **Use environment variables** for configuration values
-3. **Include form validation** for user inputs
-4. **Add logging statements** for debugging
-5. **Follow RESTful routing conventions** when appropriate
-6. **Use template inheritance** with base templates
-7. **Add CSRF tokens** to all forms
-8. **Use flash messages** for user feedback
-9. **Implement proper redirects** after form submissions
-10. **Include comprehensive docstrings** and helpful comments
+### Emergency Debug Commands ⚡
+```bash
+# Live debug with browser
+pytest --browser chromium --headed --slowmo 1000 tests/e2e/test_login.py
 
-### Flask Extension Code Generation
+# Find selector issues
+pytest --browser chromium --headed --debug tests/e2e/
 
-When generating Flask extension code:
+# Get detailed failure screenshots
+pytest --screenshot on --browser chromium tests/e2e/
 
-1. **Follow Flask extension patterns** with proper `init_app()` method
-2. **Support deferred initialization** and multiple app instances
-3. **Use proper state management** with `app.extensions`
-4. **Prefix configuration keys** with extension name
-5. **Handle application context** correctly with `current_app`
-6. **Implement proper cleanup** in teardown handlers
-7. **Provide clear public API** with descriptive method names
-8. **Include comprehensive documentation** for all public methods
-9. **Follow Flask naming conventions** (Flask-ExtensionName)
-10. **Support configuration options** with sensible defaults
+# Trace failing tests
+pytest --trace on tests/e2e/test_login.py
+```
 
-### Universal Code Generation Rules
+### ⚡ QUICK REFERENCE: Testing Setup & Commands
 
-**For both applications and extensions:**
-- **Update documentation** when adding new features or endpoints
-- **Add changelog entries** for significant changes
-- **Include comprehensive type hints** and docstrings
-- **Implement proper error handling** and logging
-- **Follow security best practices**
-- **Write comprehensive tests** for all functionality
+#### 1. Initial Setup (< 2 minutes)
+```bash
+# Install core testing tools
+pip install pytest pytest-playwright pytest-cov
 
-## Template Requirements
+# Install browsers
+playwright install chromium  # Required
+playwright install firefox   # Optional
+playwright install webkit    # Optional
+```
 
-### HTML Templates
-- Use template inheritance with base template
-- Include proper meta tags and viewport
-- Use url_for() for static files and routes
-- Include flash message handling
-- Use CSRF tokens in forms
-- Follow semantic HTML structure
+#### 2. Fast Test Commands (< 30 seconds)
+```bash
+# Run critical tests
+pytest tests/critical/
 
-## Development Workflow
+# Quick status check
+pytest --tb=no | grep -E "FAILED|ERROR"
 
-### Environment Setup
-- Always use virtual environments
-- Keep requirements.txt updated
-- Use .env for local development
-- Never commit sensitive data
-- Use .gitignore for Python projects
+# Coverage check
+pytest --cov=app --cov-report=term-missing | grep TOTAL
+```
 
-### Quality Assurance
-- Write tests for all routes and business logic
-- Run linting and formatting tools
-- Test migrations before applying to production
-- Document API endpoints and complex logic
+#### 3. Browser Test Commands (< 1 minute)
+```bash
+# Run E2E tests
+pytest tests/e2e/
+
+# Debug mode
+pytest --headed tests/e2e/
+
+# Multiple browsers
+pytest --browser chromium --browser firefox tests/e2e/
+```
+
+#### 4. Emergency Commands (< 30 seconds)
+```bash
+# Critical failures only
+pytest -x tests/critical/
+
+# Last 5 failures
+pytest --tb=short | grep -A 5 FAILED
+
+# Quick screenshot
+pytest --screenshot only-on-failure tests/e2e/
+```
+
+### Test Directory Structure ⚡
+```
+tests/
+├── critical/           # High-priority tests (Run First)
+├── unit/              # Unit tests
+├── api/               # API tests
+├── e2e/               # Browser tests
+│   ├── pages/        # Page objects
+│   ├── conftest.py   # Fixtures
+│   └── test_*.py     # Test files
+└── conftest.py       # Global fixtures
+```
+
+### Emergency Test Protocol ⚡
+1. Run critical tests FIRST:
+   ```bash
+   pytest tests/critical/
+   ```
+
+2. If critical tests pass, run specific area:
+   ```bash
+   pytest tests/e2e/test_login.py
+   ```
+
+3. If tests fail, get quick debug info:
+   ```bash
+   pytest -x --tb=short | grep -A 5 FAILED
+   ```
+``````
